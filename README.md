@@ -29,7 +29,7 @@ This project demonstrates implementation of federal security standards:
 
 ```bash
 # Clone and setup
-git clone <repository-url>
+git clone https://github.com/ralenjor/envirosensor.git
 cd envirosensor
 python -m venv venv
 source venv/bin/activate  # On Windows: venv\Scripts\activate
