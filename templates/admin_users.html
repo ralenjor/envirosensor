@@ -1,0 +1,108 @@
+{% extends "base.html" %}
+
+{% block title %}Manage Users - Environmental Sensor System{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <h1 class="mb-4">Manage User Accounts</h1>
+        <p class="text-muted">
+            View user accounts and unlock locked accounts. Accounts are automatically locked
+            after 4 failed login attempts and unlock after 15 minutes.
+        </p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">User Accounts</h5>
+            </div>
+            <div class="card-body p-0">
+                {% if users %}
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover mb-0">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>Username</th>
+                                <th>Role</th>
+                                <th>Status</th>
+                                <th>Failed Attempts</th>
+                                <th>Locked Until</th>
+                                <th>Last Login</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for u in users %}
+                            <tr>
+                                <td>
+                                    <strong>{{ u.username }}</strong>
+                                    {% if u.username == user.username %}
+                                    <span class="badge bg-info">You</span>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if u.role == 'administrator' %}
+                                    <span class="badge bg-warning text-dark">{{ u.role }}</span>
+                                    {% else %}
+                                    <span class="badge bg-secondary">{{ u.role }}</span>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if u.locked %}
+                                    <span class="badge bg-danger">Locked</span>
+                                    {% else %}
+                                    <span class="badge bg-success">Active</span>
+                                    {% endif %}
+                                </td>
+                                <td>{{ u.failed_attempts or 0 }}</td>
+                                <td>{{ u.locked_until or '-' }}</td>
+                                <td>{{ u.last_login or 'Never' }}</td>
+                                <td>
+                                    {% if u.locked %}
+                                    <form method="POST" class="d-inline"
+                                          action="{{ url_for('admin_user_unlock', username=u.username) }}">
+                                        <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
+                                        <button type="submit" class="btn btn-warning btn-sm">
+                                            Unlock
+                                        </button>
+                                    </form>
+                                    {% else %}
+                                    <span class="text-muted">-</span>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                {% else %}
+                <div class="p-4 text-center text-muted">
+                    <p class="mb-0">No user accounts found.</p>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">Account Lockout Policy</h5>
+            </div>
+            <div class="card-body">
+                <ul class="mb-0">
+                    <li>Accounts are locked after <strong>4 consecutive failed login attempts</strong></li>
+                    <li>Locked accounts <strong>automatically unlock after 15 minutes</strong></li>
+                    <li>Administrators can manually unlock accounts using the button above</li>
+                    <li>All lockout and unlock events are logged for audit purposes</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

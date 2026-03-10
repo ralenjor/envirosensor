@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+
+{% block title %}Environmental Results - Environmental Sensor System{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <h1 class="mb-4">Environmental Sensor Results</h1>
+        <p class="text-muted">
+            Temperature and humidity readings from the last 24 hours.
+            Displaying {{ readings|length }} readings.
+        </p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">Sensor Data (Last 24 Hours)</h5>
+            </div>
+            <div class="card-body p-0">
+                {% if readings %}
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover table-sensor mb-0">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>Timestamp (UTC)</th>
+                                <th>Sensor ID</th>
+                                <th>Temperature (°F)</th>
+                                <th>Humidity (%)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for reading in readings %}
+                            <tr>
+                                <td>{{ reading.timestamp }}</td>
+                                <td>{{ reading.sensor_id }}</td>
+                                <td>
+                                    <span class="{% if reading.temperature_f > 78 %}temp-high{% elif reading.temperature_f < 67 %}temp-low{% else %}temp-normal{% endif %}">
+                                        {{ "%.1f"|format(reading.temperature_f) }}°F
+                                    </span>
+                                </td>
+                                <td>
+                                    <span class="{% if reading.humidity_percent > 55 %}humidity-high{% elif reading.humidity_percent < 35 %}humidity-low{% else %}humidity-normal{% endif %}">
+                                        {{ "%.1f"|format(reading.humidity_percent) }}%
+                                    </span>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                {% else %}
+                <div class="p-4 text-center text-muted">
+                    <p class="mb-0">No sensor readings available for the last 24 hours.</p>
+                    {% if user.role == 'administrator' %}
+                    <p class="mt-2">
+                        <a href="{{ url_for('admin_sensor') }}">Add sensor readings</a> or
+                        run the data generator script.
+                    </p>
+                    {% endif %}
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% if readings %}
+<div class="row mt-4">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h6 class="mb-0">Temperature Summary</h6>
+            </div>
+            <div class="card-body">
+                {% set temps = readings|map(attribute='temperature_f')|list %}
+                <ul class="list-unstyled mb-0">
+                    <li><strong>Minimum:</strong> {{ "%.1f"|format(temps|min) }}°F</li>
+                    <li><strong>Maximum:</strong> {{ "%.1f"|format(temps|max) }}°F</li>
+                    <li><strong>Average:</strong> {{ "%.1f"|format(temps|sum / temps|length) }}°F</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h6 class="mb-0">Humidity Summary</h6>
+            </div>
+            <div class="card-body">
+                {% set humids = readings|map(attribute='humidity_percent')|list %}
+                <ul class="list-unstyled mb-0">
+                    <li><strong>Minimum:</strong> {{ "%.1f"|format(humids|min) }}%</li>
+                    <li><strong>Maximum:</strong> {{ "%.1f"|format(humids|max) }}%</li>
+                    <li><strong>Average:</strong> {{ "%.1f"|format(humids|sum / humids|length) }}%</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock %}

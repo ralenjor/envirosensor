@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}Welcome - Environmental Sensor System{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header bg-success text-white">
+                <h4 class="mb-0">Welcome, {{ user.username }}!</h4>
+            </div>
+            <div class="card-body">
+                <p class="lead">
+                    You have successfully logged into the Environmental Sensor Monitoring System.
+                </p>
+
+                {% if user.previous_login %}
+                <div class="alert alert-info">
+                    <strong>Previous Login:</strong> {{ user.previous_login }}
+                </div>
+                {% else %}
+                <div class="alert alert-info">
+                    <strong>Note:</strong> This is your first login to the system.
+                </div>
+                {% endif %}
+
+                <p>Your role: <strong>{{ user.role }}</strong></p>
+
+                <hr>
+
+                <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+                    <a href="{{ url_for('home') }}" class="btn btn-primary">
+                        Go to Home
+                    </a>
+                    <a href="{{ url_for('sensor_data') }}" class="btn btn-outline-primary">
+                        View Environmental Data
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

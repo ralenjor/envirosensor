@@ -1,0 +1,109 @@
+Run started:2026-03-10 21:17:36.861847+00:00
+
+Test results:
+>> Issue: [B105:hardcoded_password_string] Possible hardcoded password: 'pbkdf2:sha256'
+   Severity: Low   Confidence: Medium
+   CWE: CWE-259 (https://cwe.mitre.org/data/definitions/259.html)
+   More Info: https://bandit.readthedocs.io/en/1.9.4/plugins/b105_hardcoded_password_string.html
+   Location: /home/chris/Documents/Projects/envirosensor/config.py:32:27
+31	    # Password hashing settings
+32	    PASSWORD_HASH_METHOD = 'pbkdf2:sha256'
+33	    PASSWORD_HASH_ITERATIONS = 600000  # Werkzeug default for PBKDF2
+
+--------------------------------------------------
+>> Issue: [B311:blacklist] Standard pseudo-random generators are not suitable for security/cryptographic purposes.
+   Severity: Low   Confidence: High
+   CWE: CWE-330 (https://cwe.mitre.org/data/definitions/330.html)
+   More Info: https://bandit.readthedocs.io/en/1.9.4/blacklists/blacklist_calls.html#b311-random
+   Location: /home/chris/Documents/Projects/envirosensor/utils/data_generator.py:43:22
+42	        # Vary by up to 1.5 degrees from previous reading
+43	        temp_change = random.uniform(-1.5, 1.5)
+44	        temperature = prev_temp + temp_change
+
+--------------------------------------------------
+>> Issue: [B311:blacklist] Standard pseudo-random generators are not suitable for security/cryptographic purposes.
+   Severity: Low   Confidence: High
+   CWE: CWE-330 (https://cwe.mitre.org/data/definitions/330.html)
+   More Info: https://bandit.readthedocs.io/en/1.9.4/blacklists/blacklist_calls.html#b311-random
+   Location: /home/chris/Documents/Projects/envirosensor/utils/data_generator.py:48:22
+47	    else:
+48	        temperature = random.uniform(TEMP_MIN, TEMP_MAX)
+49	
+
+--------------------------------------------------
+>> Issue: [B311:blacklist] Standard pseudo-random generators are not suitable for security/cryptographic purposes.
+   Severity: Low   Confidence: High
+   CWE: CWE-330 (https://cwe.mitre.org/data/definitions/330.html)
+   More Info: https://bandit.readthedocs.io/en/1.9.4/blacklists/blacklist_calls.html#b311-random
+   Location: /home/chris/Documents/Projects/envirosensor/utils/data_generator.py:53:26
+52	        # Vary by up to 3% from previous reading
+53	        humidity_change = random.uniform(-3.0, 3.0)
+54	        humidity = prev_humidity + humidity_change
+
+--------------------------------------------------
+>> Issue: [B311:blacklist] Standard pseudo-random generators are not suitable for security/cryptographic purposes.
+   Severity: Low   Confidence: High
+   CWE: CWE-330 (https://cwe.mitre.org/data/definitions/330.html)
+   More Info: https://bandit.readthedocs.io/en/1.9.4/blacklists/blacklist_calls.html#b311-random
+   Location: /home/chris/Documents/Projects/envirosensor/utils/data_generator.py:58:19
+57	    else:
+58	        humidity = random.uniform(HUMIDITY_MIN, HUMIDITY_MAX)
+59	
+
+--------------------------------------------------
+>> Issue: [B105:hardcoded_password_string] Possible hardcoded password: 'temporary-key-for-setup'
+   Severity: Low   Confidence: Medium
+   CWE: CWE-259 (https://cwe.mitre.org/data/definitions/259.html)
+   More Info: https://bandit.readthedocs.io/en/1.9.4/plugins/b105_hardcoded_password_string.html
+   Location: /home/chris/Documents/Projects/envirosensor/utils/setup_users.py:30:15
+29	if not os.environ.get('SECRET_KEY'):
+30	    os.environ['SECRET_KEY'] = 'temporary-key-for-setup'
+31	
+
+--------------------------------------------------
+>> Issue: [B105:hardcoded_password_string] Possible hardcoded password: 'AdminPass123!'
+   Severity: Low   Confidence: Medium
+   CWE: CWE-259 (https://cwe.mitre.org/data/definitions/259.html)
+   More Info: https://bandit.readthedocs.io/en/1.9.4/plugins/b105_hardcoded_password_string.html
+   Location: /home/chris/Documents/Projects/envirosensor/utils/setup_users.py:44:12
+43	            'username': 'admin',
+44	            'password': 'AdminPass123!',
+45	            'role': 'administrator'
+46	        },
+47	        {
+48	            'username': 'user1',
+49	            'password': 'UserPass123!',
+
+--------------------------------------------------
+>> Issue: [B105:hardcoded_password_string] Possible hardcoded password: 'UserPass123!'
+   Severity: Low   Confidence: Medium
+   CWE: CWE-259 (https://cwe.mitre.org/data/definitions/259.html)
+   More Info: https://bandit.readthedocs.io/en/1.9.4/plugins/b105_hardcoded_password_string.html
+   Location: /home/chris/Documents/Projects/envirosensor/utils/setup_users.py:49:12
+48	            'username': 'user1',
+49	            'password': 'UserPass123!',
+50	            'role': 'user'
+51	        }
+52	    ]
+53	
+54	    print("Setting up default user accounts...")
+
+--------------------------------------------------
+
+Code scanned:
+	Total lines of code: 1026
+	Total lines skipped (#nosec): 0
+	Total potential issues skipped due to specifically being disabled (e.g., #nosec BXXX): 0
+
+Run metrics:
+	Total issues (by severity):
+		Undefined: 0
+		Low: 8
+		Medium: 0
+		High: 0
+	Total issues (by confidence):
+		Undefined: 0
+		Low: 0
+		Medium: 4
+		High: 4
+Files skipped (0):

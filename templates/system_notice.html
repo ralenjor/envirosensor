@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}System Use Notification - Environmental Sensor System{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+        <div class="card border-warning">
+            <div class="card-header bg-warning text-dark">
+                <h4 class="mb-0">System Use Notification</h4>
+            </div>
+            <div class="card-body">
+                <div class="alert alert-secondary">
+                    <p><strong>WARNING:</strong> This is a controlled access system.</p>
+                    <ul class="mb-0">
+                        <li>System usage may be monitored, recorded, and subject to audit.</li>
+                        <li>Unauthorized use of the system is prohibited and subject to criminal and civil penalties.</li>
+                        <li>Use of the system indicates consent to monitoring and recording.</li>
+                    </ul>
+                </div>
+
+                <p class="text-muted small">
+                    By clicking "I Acknowledge" below, you confirm that you have read and understood
+                    the above notice and consent to comply with all applicable policies and regulations
+                    governing the use of this system.
+                </p>
+
+                <form method="POST" action="{{ url_for('acknowledge_notice') }}">
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-primary btn-lg">
+                            I Acknowledge
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

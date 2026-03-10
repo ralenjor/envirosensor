@@ -1,0 +1,676 @@
+{
+  "readings": [
+    {
+      "id": "8bb6d836-dd18-43f3-a2cb-9e17cafbe490",
+      "timestamp": "2026-03-09T18:48:11.683813",
+      "temperature_f": 68.09,
+      "humidity_percent": 34.35,
+      "sensor_id": "SENSOR-001"
+    },
+    {
+      "id": "0065e1a2-1f4d-4b62-b968-761ae59aab1c",
+      "timestamp": "2026-03-09T19:03:11.683813",
+      "temperature_f": 68.76,
+      "humidity_percent": 37.17,
+      "sensor_id": "SENSOR-001"
+    },
+    {
+      "id": "6e7c1606-36f1-4ee5-856a-769e75f21026",
+      "timestamp": "2026-03-09T19:18:11.683813",
+      "temperature_f": 70.04,
+      "humidity_percent": 37.55,
+      "sensor_id": "SENSOR-001"
+    },
+    {
+      "id": "256fb780-62aa-4094-9a66-4328bae46bc2",
+      "timestamp": "2026-03-09T19:33:11.683813",
+      "temperature_f": 68.98,
+      "humidity_percent": 35.36,
+      "sensor_id": "SENSOR-001"
+    },
+    {
+      "id": "048257b6-4634-47af-baf5-f0580f892fe8",
+      "timestamp": "2026-03-09T19:48:11.683813",
+      "temperature_f": 67.76,
+      "humidity_percent": 36.76,
+      "sensor_id": "SENSOR-001"
+    },
+    {
+      "id": "473867a8-3cc0-4b23-bda7-2b6410ad681e",
+      "timestamp": "2026-03-09T20:03:11.683813",
+      "temperature_f": 66.48,
+      "humidity_percent": 39.58,
+      "sensor_id": "SENSOR-001"
+    },
+    {
+      "id": "0035dea6-191d-4ca4-ab1a-43a218e753e8",
+      "timestamp": "2026-03-09T20:18:11.683813",
+      "temperature_f": 67.51,
+      "humidity_percent": 41.19,
+      "sensor_id": "SENSOR-001"
+    },
+    {
+      "id": "1c44a0fe-5592-452b-a70b-34619999b590",
+      "timestamp": "2026-03-09T20:33:11.683813",
+      "temperature_f": 66.18,
+      "humidity_percent": 41.16,
+      "sensor_id": "SENSOR-001"
+    },
+    {
+      "id": "54bda643-0381-45c6-97b7-66b850437b7e",
+      "timestamp": "2026-03-09T20:48:11.683813",
+      "temperature_f": 65.72,
+      "humidity_percent": 39.62,
+      "sensor_id": "SENSOR-001"
+    },
+    {
+      "id": "eec97211-22be-424e-bf70-7da84e1d369c",
+      "timestamp": "2026-03-09T21:03:11.683813",
+      "temperature_f": 67.02,
+      "humidity_percent": 37.28,
+      "sensor_id": "SENSOR-001"
+    },
+    {
+      "id": "32813ccd-7082-42a4-a482-1704d6d13e96",
+      "timestamp": "2026-03-09T21:18:11.683813",
+      "temperature_f": 68.07,
+      "humidity_percent": 38.07,
+      "sensor_id": "SENSOR-001"
+    },
+    {
+      "id": "9806251a-cfb7-42bd-a73c-e792b084efd3",
+      "timestamp": "2026-03-09T21:33:11.683813",
+      "temperature_f": 67.96,
+      "humidity_percent": 35.15,
+      "sensor_id": "SENSOR-001"
+    },
+    {
+      "id": "dd5659a7-2cdf-4405-a0e5-90b4ebed452c",
+      "timestamp": "2026-03-09T21:48:11.683813",
+      "temperature_f": 67.11,
+      "humidity_percent": 36.95,
+      "sensor_id": "SENSOR-001"
+    },
+    {
+      "id": "39a71c16-06d0-471e-96a1-30f9a03baf51",
+      "timestamp": "2026-03-09T22:03:11.683813",
+      "temperature_f": 67.34,
+      "humidity_percent": 37.83,
+      "sensor_id": "SENSOR-001"
+    },
+    {
+      "id": "f017807e-1516-413c-a293-db0cce35c1b7",
+      "timestamp": "2026-03-09T22:18:11.683813",
+      "temperature_f": 67.57,
+      "humidity_percent": 39.53,
+      "sensor_id": "SENSOR-001"
+    },
+    {
+      "id": "6ba0de6d-95d2-4c58-bb98-5f5e9c2083ee",
+      "timestamp": "2026-03-09T22:33:11.683813",
+      "temperature_f": 66.47,
+      "humidity_percent": 40.73,
+      "sensor_id": "SENSOR-001"
+    },
+    {
+      "id": "1bcabf44-4185-4e40-889f-593827d83b7f",
+      "timestamp": "2026-03-09T22:48:11.683813",
+      "temperature_f": 65.45,
+      "humidity_percent": 38.39,
+      "sensor_id": "SENSOR-001"
+    },
+    {
+      "id": "5002bc8e-7673-4fad-a853-ff43a9ba7f7c",
+      "timestamp": "2026-03-09T23:03:11.683813",
+      "temperature_f": 65.0,
+      "humidity_percent": 39.7,
+      "sensor_id": "SENSOR-001"
+    },
+    {
+      "id": "e64bad69-f4ad-47e2-b6cf-79e79ae4e702",
+      "timestamp": "2026-03-09T23:18:11.683813",
+      "temperature_f": 65.0,
+      "humidity_percent": 41.37,
+      "sensor_id": "SENSOR-001"
+    },
+    {
+      "id": "aa220caa-f206-4ed3-bedf-da0e157ea616",
+      "timestamp": "2026-03-09T23:33:11.683813",
+      "temperature_f": 65.13,
+      "humidity_percent": 43.99,
+      "sensor_id": "SENSOR-001"
+    },
+    {
+      "id": "d53fe81d-0e92-40e5-9c8d-e7d48b37aa36",
+      "timestamp": "2026-03-09T23:48:11.683813",
+      "temperature_f": 65.22,
+      "humidity_percent": 43.1,
+      "sensor_id": "SENSOR-001"
+    },
+    {
+      "id": "bdad33dd-9820-4452-bea8-28a89e8e6ada",
+      "timestamp": "2026-03-10T00:03:11.683813",
+      "temperature_f": 66.45,
+      "humidity_percent": 46.03,
+      "sensor_id": "SENSOR-001"
+    },
+    {
+      "id": "ea322a28-86e1-4bcc-8323-a69aca89c533",
+      "timestamp": "2026-03-10T00:18:11.683813",
+      "temperature_f": 65.73,
+      "humidity_percent": 45.53,
+      "sensor_id": "SENSOR-001"
+    },
+    {
+      "id": "7d88cce4-462b-42eb-beee-04d9f0594867",
+      "timestamp": "2026-03-10T00:33:11.683813",
+      "temperature_f": 65.73,
+      "humidity_percent": 44.39,
+      "sensor_id": "SENSOR-001"
+    },
+    {
+      "id": "1c09a415-a520-4cec-81c8-131f54cc7446",
+      "timestamp": "2026-03-10T00:48:11.683813",
+      "temperature_f": 65.0,
+      "humidity_percent": 41.71,
+      "sensor_id": "SENSOR-001"
+    },
+    {
+      "id": "87b22622-4263-4f11-9b6a-cea63452632d",
+      "timestamp": "2026-03-10T01:03:11.683813",
+      "temperature_f": 66.4,
+      "humidity_percent": 42.31,
+      "sensor_id": "SENSOR-001"
+    },
+    {
+      "id": "6d3ecead-f1a3-4d79-89ed-b1e177f19233",
+      "timestamp": "2026-03-10T01:18:11.683813",
+      "temperature_f": 65.67,
+      "humidity_percent": 44.27,
+      "sensor_id": "SENSOR-001"
+    },
+    {
+      "id": "b2393608-f8a6-42a7-8198-3a5c6e5d18d3",
+      "timestamp": "2026-03-10T01:33:11.683813",
+      "temperature_f": 67.11,
+      "humidity_percent": 43.44,
+      "sensor_id": "SENSOR-001"
+    },
+    {
+      "id": "b8488a40-8ffd-4a72-847f-52a591225351",
+      "timestamp": "2026-03-10T01:48:11.683813",
+      "temperature_f": 65.89,
+      "humidity_percent": 43.86,
+      "sensor_id": "SENSOR-001"
+    },
+    {
+      "id": "4780cd09-5e7c-40ed-be2a-382e1b62cdac",
+      "timestamp": "2026-03-10T02:03:11.683813",
+      "temperature_f": 65.0,
+      "humidity_percent": 43.16,
+      "sensor_id": "SENSOR-001"
+    },
+    {
+      "id": "edafd12a-1887-4c7c-8bde-53274307cb49",
+      "timestamp": "2026-03-10T02:18:11.683813",
+      "temperature_f": 65.0,
+      "humidity_percent": 46.11,
+      "sensor_id": "SENSOR-001"
+    },
+    {
+      "id": "dd14b6d8-81a3-4af8-8d00-9329aafcde39",
+      "timestamp": "2026-03-10T02:33:11.683813",
+      "temperature_f": 65.0,
+      "humidity_percent": 45.95,
+      "sensor_id": "SENSOR-001"
+    },
+    {
+      "id": "11fa3be2-7da5-46cd-a4cd-a66846e33798",
+      "timestamp": "2026-03-10T02:48:11.683813",
+      "temperature_f": 65.0,
+      "humidity_percent": 43.83,
+      "sensor_id": "SENSOR-001"
+    },
+    {
+      "id": "1321019e-ef33-4fd7-9e2b-85511ad2d05c",
+      "timestamp": "2026-03-10T03:03:11.683813",
+      "temperature_f": 65.0,
+      "humidity_percent": 44.65,
+      "sensor_id": "SENSOR-001"
+    },
+    {
+      "id": "cd05f616-9750-495d-ad3b-90f73a125b1b",
+      "timestamp": "2026-03-10T03:18:11.683813",
+      "temperature_f": 65.0,
+      "humidity_percent": 46.44,
+      "sensor_id": "SENSOR-001"
+    },
+    {
+      "id": "17db886d-9850-4620-b8df-48aa51b4e397",
+      "timestamp": "2026-03-10T03:33:11.683813",
+      "temperature_f": 65.0,
+      "humidity_percent": 44.67,
+      "sensor_id": "SENSOR-001"
+    },
+    {
+      "id": "b5430074-cc91-4baf-9d28-75e9bb5ea633",
+      "timestamp": "2026-03-10T03:48:11.683813",
+      "temperature_f": 66.49,
+      "humidity_percent": 45.91,
+      "sensor_id": "SENSOR-001"
+    },
+    {
+      "id": "f6a45fdc-3dfe-4559-b002-fad507ae0325",
+      "timestamp": "2026-03-10T04:03:11.683813",
+      "temperature_f": 65.91,
+      "humidity_percent": 48.51,
+      "sensor_id": "SENSOR-001"
+    },
+    {
+      "id": "5a844c7d-be85-433e-b7dc-c78b5e9d7747",
+      "timestamp": "2026-03-10T04:18:11.683813",
+      "temperature_f": 66.61,
+      "humidity_percent": 46.47,
+      "sensor_id": "SENSOR-001"
+    },
+    {
+      "id": "b3eac86f-5d19-4c99-bde2-db2b9f21711f",
+      "timestamp": "2026-03-10T04:33:11.683813",
+      "temperature_f": 67.94,
+      "humidity_percent": 44.44,
+      "sensor_id": "SENSOR-001"
+    },
+    {
+      "id": "63eb4fa0-9ea0-4e84-a4d8-003b27210e7b",
+      "timestamp": "2026-03-10T04:48:11.683813",
+      "temperature_f": 67.13,
+      "humidity_percent": 44.93,
+      "sensor_id": "SENSOR-001"
+    },
+    {
+      "id": "343ee094-32a3-41c7-88a5-0582a7e80110",
+      "timestamp": "2026-03-10T05:03:11.683813",
+      "temperature_f": 67.29,
+      "humidity_percent": 45.62,
+      "sensor_id": "SENSOR-001"
+    },
+    {
+      "id": "c808103c-4b07-411f-a2b9-a8d64c4e73b0",
+      "timestamp": "2026-03-10T05:18:11.683813",
+      "temperature_f": 65.98,
+      "humidity_percent": 44.22,
+      "sensor_id": "SENSOR-001"
+    },
+    {
+      "id": "04e1052a-ffb7-4dc1-ba0e-6510c508198a",
+      "timestamp": "2026-03-10T05:33:11.683813",
+      "temperature_f": 65.0,
+      "humidity_percent": 45.45,
+      "sensor_id": "SENSOR-001"
+    },
+    {
+      "id": "60f88615-30b8-4c30-8395-66a10c7e3345",
+      "timestamp": "2026-03-10T05:48:11.683813",
+      "temperature_f": 66.13,
+      "humidity_percent": 47.97,
+      "sensor_id": "SENSOR-001"
+    },
+    {
+      "id": "a503fa27-7b2d-44e3-b3f2-beba888b84e7",
+      "timestamp": "2026-03-10T06:03:11.683813",
+      "temperature_f": 67.46,
+      "humidity_percent": 47.51,
+      "sensor_id": "SENSOR-001"
+    },
+    {
+      "id": "1499e2b3-dadc-452d-86b8-42e08e543e64",
+      "timestamp": "2026-03-10T06:18:11.683813",
+      "temperature_f": 67.76,
+      "humidity_percent": 49.25,
+      "sensor_id": "SENSOR-001"
+    },
+    {
+      "id": "c4e09122-1a81-4015-878b-92a87cf595ca",
+      "timestamp": "2026-03-10T06:33:11.683813",
+      "temperature_f": 66.71,
+      "humidity_percent": 46.94,
+      "sensor_id": "SENSOR-001"
+    },
+    {
+      "id": "7d2a6599-c341-4b9e-bb79-590a6020be26",
+      "timestamp": "2026-03-10T06:48:11.683813",
+      "temperature_f": 66.67,
+      "humidity_percent": 46.78,
+      "sensor_id": "SENSOR-001"
+    },
+    {
+      "id": "c089fe78-3ff4-41e7-8ec3-a09775f2a13a",
+      "timestamp": "2026-03-10T07:03:11.683813",
+      "temperature_f": 66.32,
+      "humidity_percent": 46.07,
+      "sensor_id": "SENSOR-001"
+    },
+    {
+      "id": "8e6f75db-bbe3-4186-af1d-9fb8e22764c8",
+      "timestamp": "2026-03-10T07:18:11.683813",
+      "temperature_f": 65.92,
+      "humidity_percent": 43.8,
+      "sensor_id": "SENSOR-001"
+    },
+    {
+      "id": "8da579e9-48b3-4997-9ea3-21d164fd412b",
+      "timestamp": "2026-03-10T07:33:11.683813",
+      "temperature_f": 65.13,
+      "humidity_percent": 41.21,
+      "sensor_id": "SENSOR-001"
+    },
+    {
+      "id": "88cee696-df67-4d8a-b70e-acf1bfa57ec4",
+      "timestamp": "2026-03-10T07:48:11.683813",
+      "temperature_f": 65.94,
+      "humidity_percent": 42.26,
+      "sensor_id": "SENSOR-001"
+    },
+    {
+      "id": "05c4051a-d504-44d9-81af-337090765ab1",
+      "timestamp": "2026-03-10T08:03:11.683813",
+      "temperature_f": 65.35,
+      "humidity_percent": 44.38,
+      "sensor_id": "SENSOR-001"
+    },
+    {
+      "id": "a14cf316-1731-431f-8c30-1280515d0157",
+      "timestamp": "2026-03-10T08:18:11.683813",
+      "temperature_f": 65.0,
+      "humidity_percent": 42.49,
+      "sensor_id": "SENSOR-001"
+    },
+    {
+      "id": "876b071c-d469-43db-9d38-452c72a21669",
+      "timestamp": "2026-03-10T08:33:11.683813",
+      "temperature_f": 65.26,
+      "humidity_percent": 44.86,
+      "sensor_id": "SENSOR-001"
+    },
+    {
+      "id": "ca6b9950-c1ea-45c3-b4f6-50b2db152b51",
+      "timestamp": "2026-03-10T08:48:11.683813",
+      "temperature_f": 65.85,
+      "humidity_percent": 46.24,
+      "sensor_id": "SENSOR-001"
+    },
+    {
+      "id": "276e7c50-72c0-4b53-a2bf-a497780d3c0a",
+      "timestamp": "2026-03-10T09:03:11.683813",
+      "temperature_f": 66.91,
+      "humidity_percent": 43.79,
+      "sensor_id": "SENSOR-001"
+    },
+    {
+      "id": "7eebdbad-b4a2-458b-b9b0-e154a4668dec",
+      "timestamp": "2026-03-10T09:18:11.683813",
+      "temperature_f": 67.15,
+      "humidity_percent": 44.99,
+      "sensor_id": "SENSOR-001"
+    },
+    {
+      "id": "d69ae221-e0e1-412c-889f-ed1b664b7a2d",
+      "timestamp": "2026-03-10T09:33:11.683813",
+      "temperature_f": 66.84,
+      "humidity_percent": 44.87,
+      "sensor_id": "SENSOR-001"
+    },
+    {
+      "id": "6f5c32e3-005e-4351-99c5-8c3183375188",
+      "timestamp": "2026-03-10T09:48:11.683813",
+      "temperature_f": 67.28,
+      "humidity_percent": 46.72,
+      "sensor_id": "SENSOR-001"
+    },
+    {
+      "id": "90e8e307-d6b2-40cd-b89b-252126431fdb",
+      "timestamp": "2026-03-10T10:03:11.683813",
+      "temperature_f": 68.77,
+      "humidity_percent": 48.63,
+      "sensor_id": "SENSOR-001"
+    },
+    {
+      "id": "0b745f1c-131f-402b-835d-523aa3fa69c3",
+      "timestamp": "2026-03-10T10:18:11.683813",
+      "temperature_f": 67.97,
+      "humidity_percent": 46.43,
+      "sensor_id": "SENSOR-001"
+    },
+    {
+      "id": "db9af890-7d04-477d-bf16-f9151de31a09",
+      "timestamp": "2026-03-10T10:33:11.683813",
+      "temperature_f": 66.72,
+      "humidity_percent": 44.03,
+      "sensor_id": "SENSOR-001"
+    },
+    {
+      "id": "5fc9554e-735d-4613-bfa4-26416847406f",
+      "timestamp": "2026-03-10T10:48:11.683813",
+      "temperature_f": 67.31,
+      "humidity_percent": 46.85,
+      "sensor_id": "SENSOR-001"
+    },
+    {
+      "id": "7dd83a2c-c5c1-4d22-a5c4-0e78bf458e79",
+      "timestamp": "2026-03-10T11:03:11.683813",
+      "temperature_f": 67.98,
+      "humidity_percent": 48.96,
+      "sensor_id": "SENSOR-001"
+    },
+    {
+      "id": "3738b999-88f7-405e-b67f-84b2d9123fed",
+      "timestamp": "2026-03-10T11:18:11.683813",
+      "temperature_f": 67.86,
+      "humidity_percent": 51.82,
+      "sensor_id": "SENSOR-001"
+    },
+    {
+      "id": "559b3191-6cf1-4566-9f54-2a87583f8124",
+      "timestamp": "2026-03-10T11:33:11.683813",
+      "temperature_f": 67.37,
+      "humidity_percent": 49.73,
+      "sensor_id": "SENSOR-001"
+    },
+    {
+      "id": "70315515-b330-4447-a187-a57d122f4869",
+      "timestamp": "2026-03-10T11:48:11.683813",
+      "temperature_f": 67.22,
+      "humidity_percent": 50.11,
+      "sensor_id": "SENSOR-001"
+    },
+    {
+      "id": "2084fac1-0154-438b-a062-5766ceb98f80",
+      "timestamp": "2026-03-10T12:03:11.683813",
+      "temperature_f": 68.56,
+      "humidity_percent": 49.94,
+      "sensor_id": "SENSOR-001"
+    },
+    {
+      "id": "ee37d57c-3e00-4aed-a953-0570155c87ca",
+      "timestamp": "2026-03-10T12:18:11.683813",
+      "temperature_f": 67.06,
+      "humidity_percent": 50.24,
+      "sensor_id": "SENSOR-001"
+    },
+    {
+      "id": "1fa9f179-e5b3-4b4d-a91b-407e9990bda6",
+      "timestamp": "2026-03-10T12:33:11.683813",
+      "temperature_f": 66.82,
+      "humidity_percent": 49.11,
+      "sensor_id": "SENSOR-001"
+    },
+    {
+      "id": "a5880af0-a349-4db4-8356-ecb988d8048d",
+      "timestamp": "2026-03-10T12:48:11.683813",
+      "temperature_f": 65.39,
+      "humidity_percent": 51.36,
+      "sensor_id": "SENSOR-001"
+    },
+    {
+      "id": "00ff2e7c-1f5f-4fef-be44-f8e0147aefb6",
+      "timestamp": "2026-03-10T13:03:11.683813",
+      "temperature_f": 65.0,
+      "humidity_percent": 50.78,
+      "sensor_id": "SENSOR-001"
+    },
+    {
+      "id": "aacad7aa-9426-4c9c-8b00-d4dddb45a92f",
+      "timestamp": "2026-03-10T13:18:11.683813",
+      "temperature_f": 65.13,
+      "humidity_percent": 49.98,
+      "sensor_id": "SENSOR-001"
+    },
+    {
+      "id": "8da195ce-c1df-43c2-8fd7-e02abc55c4c6",
+      "timestamp": "2026-03-10T13:33:11.683813",
+      "temperature_f": 66.23,
+      "humidity_percent": 49.63,
+      "sensor_id": "SENSOR-001"
+    },
+    {
+      "id": "f32b19ca-43ba-470b-80ca-5bff6326dee1",
+      "timestamp": "2026-03-10T13:48:11.683813",
+      "temperature_f": 66.55,
+      "humidity_percent": 50.77,
+      "sensor_id": "SENSOR-001"
+    },
+    {
+      "id": "effc9872-9c7b-46c6-a04c-bba3dc603ef6",
+      "timestamp": "2026-03-10T14:03:11.683813",
+      "temperature_f": 67.28,
+      "humidity_percent": 53.48,
+      "sensor_id": "SENSOR-001"
+    },
+    {
+      "id": "6f1af028-f01f-4067-b186-72768c0d4962",
+      "timestamp": "2026-03-10T14:18:11.683813",
+      "temperature_f": 66.37,
+      "humidity_percent": 51.85,
+      "sensor_id": "SENSOR-001"
+    },
+    {
+      "id": "3cca3e1d-cd71-4ed9-84be-a5379e3999da",
+      "timestamp": "2026-03-10T14:33:11.683813",
+      "temperature_f": 66.26,
+      "humidity_percent": 51.68,
+      "sensor_id": "SENSOR-001"
+    },
+    {
+      "id": "b6e9f7cb-e64c-4615-ad14-a157f255295e",
+      "timestamp": "2026-03-10T14:48:11.683813",
+      "temperature_f": 65.09,
+      "humidity_percent": 52.35,
+      "sensor_id": "SENSOR-001"
+    },
+    {
+      "id": "294513e6-0cef-4781-a287-fb2f7f48beca",
+      "timestamp": "2026-03-10T15:03:11.683813",
+      "temperature_f": 66.36,
+      "humidity_percent": 50.84,
+      "sensor_id": "SENSOR-001"
+    },
+    {
+      "id": "c5472d32-0da8-4b6e-932b-c33bbdb738da",
+      "timestamp": "2026-03-10T15:18:11.683813",
+      "temperature_f": 66.86,
+      "humidity_percent": 49.39,
+      "sensor_id": "SENSOR-001"
+    },
+    {
+      "id": "948fb399-11d4-40c8-8077-778e7fe491c7",
+      "timestamp": "2026-03-10T15:33:11.683813",
+      "temperature_f": 67.96,
+      "humidity_percent": 47.45,
+      "sensor_id": "SENSOR-001"
+    },
+    {
+      "id": "a73e2b1b-6796-446f-a295-564fda33b306",
+      "timestamp": "2026-03-10T15:48:11.683813",
+      "temperature_f": 66.69,
+      "humidity_percent": 44.87,
+      "sensor_id": "SENSOR-001"
+    },
+    {
+      "id": "3c173135-58a2-4034-97dd-a11ab4d92b09",
+      "timestamp": "2026-03-10T16:03:11.683813",
+      "temperature_f": 68.1,
+      "humidity_percent": 45.35,
+      "sensor_id": "SENSOR-001"
+    },
+    {
+      "id": "23efa93e-7f8f-4a1f-a668-f157ff0a2a5f",
+      "timestamp": "2026-03-10T16:18:11.683813",
+      "temperature_f": 68.29,
+      "humidity_percent": 45.23,
+      "sensor_id": "SENSOR-001"
+    },
+    {
+      "id": "b5eb1f55-275e-46ba-bcaf-1fda2b4bd7b3",
+      "timestamp": "2026-03-10T16:33:11.683813",
+      "temperature_f": 67.8,
+      "humidity_percent": 46.61,
+      "sensor_id": "SENSOR-001"
+    },
+    {
+      "id": "dc6226a1-3bbc-45be-93cb-a2cc0f7ddf5b",
+      "timestamp": "2026-03-10T16:48:11.683813",
+      "temperature_f": 67.49,
+      "humidity_percent": 43.98,
+      "sensor_id": "SENSOR-001"
+    },
+    {
+      "id": "2fac4af0-47f8-4f08-9242-de19589d7947",
+      "timestamp": "2026-03-10T17:03:11.683813",
+      "temperature_f": 66.32,
+      "humidity_percent": 42.56,
+      "sensor_id": "SENSOR-001"
+    },
+    {
+      "id": "21757215-32b1-4fa8-8644-8fc5c65305e4",
+      "timestamp": "2026-03-10T17:18:11.683813",
+      "temperature_f": 65.89,
+      "humidity_percent": 44.15,
+      "sensor_id": "SENSOR-001"
+    },
+    {
+      "id": "3cc36776-1931-4e85-bfe4-49eb97710a15",
+      "timestamp": "2026-03-10T17:33:11.683813",
+      "temperature_f": 65.0,
+      "humidity_percent": 43.27,
+      "sensor_id": "SENSOR-001"
+    },
+    {
+      "id": "2ca26df0-ba5e-4066-8a93-8131ca801394",
+      "timestamp": "2026-03-10T17:48:11.683813",
+      "temperature_f": 65.2,
+      "humidity_percent": 44.51,
+      "sensor_id": "SENSOR-001"
+    },
+    {
+      "id": "3eb72ea3-1b58-43b5-8614-02cddbcce0f3",
+      "timestamp": "2026-03-10T18:03:11.683813",
+      "temperature_f": 65.0,
+      "humidity_percent": 47.23,
+      "sensor_id": "SENSOR-001"
+    },
+    {
+      "id": "7fe28893-5b84-4942-8029-898ef1c3f39c",
+      "timestamp": "2026-03-10T18:18:11.683813",
+      "temperature_f": 65.65,
+      "humidity_percent": 45.22,
+      "sensor_id": "SENSOR-001"
+    },
+    {
+      "id": "7adb0863-feef-4ea3-9923-8074f3e89a17",
+      "timestamp": "2026-03-10T18:33:11.683813",
+      "temperature_f": 67.12,
+      "humidity_percent": 47.36,
+      "sensor_id": "SENSOR-001"
+    }
+  ]
+}

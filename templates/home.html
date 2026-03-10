@@ -1,0 +1,202 @@
+{% extends "base.html" %}
+
+{% block title %}Home - Environmental Sensor System{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <h1 class="mb-4">Environmental Sensor Monitoring System</h1>
+
+        {% if user.previous_login %}
+        <div class="alert alert-info">
+            <strong>Last Login:</strong> {{ user.previous_login }}
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-4 mb-4">
+        <div class="card h-100">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0">Home</h5>
+            </div>
+            <div class="card-body">
+                <p class="card-text">
+                    The Home page displays your last login time and provides an overview
+                    of the available menu options within the application.
+                </p>
+            </div>
+            <div class="card-footer">
+                <span class="badge bg-secondary">Current Page</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4 mb-4">
+        <div class="card h-100">
+            <div class="card-header bg-success text-white">
+                <h5 class="mb-0">View Environmental Results</h5>
+            </div>
+            <div class="card-body">
+                <p class="card-text">
+                    View the temperature and relative humidity readings from Industrial
+                    Control System environmental sensors for the last 24 hours. Data is
+                    displayed in a sortable table format.
+                </p>
+            </div>
+            <div class="card-footer">
+                <a href="{{ url_for('sensor_data') }}" class="btn btn-success btn-sm">
+                    View Data
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4 mb-4">
+        <div class="card h-100">
+            <div class="card-header bg-info text-white">
+                <h5 class="mb-0">Cloud Status</h5>
+            </div>
+            <div class="card-body">
+                <p class="card-text">
+                    View the status of cloud-based archival and backup synchronization
+                    services. Monitor sync history, storage usage, and connection status.
+                </p>
+            </div>
+            <div class="card-footer">
+                <a href="{{ url_for('cloud_status') }}" class="btn btn-info btn-sm">
+                    View Status
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4 mb-4">
+        <div class="card h-100">
+            <div class="card-header bg-purple text-white" style="background-color: #6f42c1;">
+                <h5 class="mb-0">Reports & Analytics</h5>
+            </div>
+            <div class="card-body">
+                <p class="card-text">
+                    View trends over time, generate statistical reports, and export
+                    sensor data. Includes charts and hourly breakdowns.
+                </p>
+            </div>
+            <div class="card-footer">
+                <a href="{{ url_for('reports') }}" class="btn btn-sm" style="background-color: #6f42c1; color: white;">
+                    View Reports
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4 mb-4">
+        <div class="card h-100">
+            <div class="card-header bg-dark text-white">
+                <h5 class="mb-0">About</h5>
+            </div>
+            <div class="card-body">
+                <p class="card-text">
+                    Learn about the Environmental Sensor Monitoring System, its features,
+                    security compliance, and system information.
+                </p>
+            </div>
+            <div class="card-footer">
+                <a href="{{ url_for('about') }}" class="btn btn-dark btn-sm">
+                    Learn More
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4 mb-4">
+        <div class="card h-100">
+            <div class="card-header bg-secondary text-white">
+                <h5 class="mb-0">Logout</h5>
+            </div>
+            <div class="card-body">
+                <p class="card-text">
+                    Securely log out of the application. This will terminate your current
+                    session and return you to the login screen. Always log out when
+                    finished to protect your account.
+                </p>
+            </div>
+            <div class="card-footer">
+                <a href="{{ url_for('logout') }}" class="btn btn-secondary btn-sm">
+                    Logout
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% if user.role == 'administrator' %}
+<div class="row mt-2">
+    <div class="col-12">
+        <h4 class="mt-4 mb-3">Administrator Functions</h4>
+    </div>
+
+    <div class="col-md-4 mb-4">
+        <div class="card h-100 border-warning">
+            <div class="card-header bg-warning text-dark">
+                <h5 class="mb-0">Manage Sensor Data</h5>
+            </div>
+            <div class="card-body">
+                <p class="card-text">
+                    Insert, update, and delete sensor readings. All administrative
+                    actions are logged for audit compliance.
+                </p>
+            </div>
+            <div class="card-footer">
+                <a href="{{ url_for('admin_sensor') }}" class="btn btn-warning btn-sm">
+                    Manage Data
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4 mb-4">
+        <div class="card h-100 border-warning">
+            <div class="card-header bg-warning text-dark">
+                <h5 class="mb-0">Import Data</h5>
+            </div>
+            <div class="card-body">
+                <p class="card-text">
+                    Import environmental sensor data from external ICS data files.
+                    Supports JSON and CSV formats with validation.
+                </p>
+            </div>
+            <div class="card-footer">
+                <a href="{{ url_for('ics_import_page') }}" class="btn btn-warning btn-sm">
+                    Import Data
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4 mb-4">
+        <div class="card h-100 border-warning">
+            <div class="card-header bg-warning text-dark">
+                <h5 class="mb-0">Manage Users</h5>
+            </div>
+            <div class="card-body">
+                <p class="card-text">
+                    View user accounts and unlock locked accounts. Accounts are locked
+                    after multiple failed login attempts.
+                </p>
+            </div>
+            <div class="card-footer">
+                <a href="{{ url_for('admin_users') }}" class="btn btn-warning btn-sm">
+                    Manage Users
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock %}

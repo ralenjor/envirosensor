@@ -1,0 +1,235 @@
+{% extends "base.html" %}
+
+{% block title %}Reports & Analytics - Environmental Sensor System{% endblock %}
+
+{% block extra_css %}
+<style>
+    .chart-container {
+        position: relative;
+        height: 300px;
+        width: 100%;
+    }
+    .stat-card {
+        text-align: center;
+    }
+    .stat-card .stat-value {
+        font-size: 2rem;
+        font-weight: bold;
+    }
+    .stat-card .stat-label {
+        font-size: 0.875rem;
+        color: #6c757d;
+    }
+    .trend-up { color: #dc3545; }
+    .trend-down { color: #198754; }
+    .trend-stable { color: #6c757d; }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <h1 class="mb-4">Reports & Analytics</h1>
+        <p class="text-muted">
+            View trends, generate reports, and export environmental sensor data.
+        </p>
+    </div>
+</div>
+
+<!-- Time Range Selector -->
+<div class="row mb-4">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <form method="GET" action="{{ url_for('reports') }}" class="row g-3 align-items-center">
+                    <div class="col-auto">
+                        <label class="col-form-label">Time Range:</label>
+                    </div>
+                    <div class="col-auto">
+                        <select class="form-select" name="range" onchange="this.form.submit()">
+                            <option value="24" {% if time_range == 24 %}selected{% endif %}>Last 24 Hours</option>
+                            <option value="72" {% if time_range == 72 %}selected{% endif %}>Last 3 Days</option>
+                            <option value="168" {% if time_range == 168 %}selected{% endif %}>Last 7 Days</option>
+                            <option value="720" {% if time_range == 720 %}selected{% endif %}>Last 30 Days</option>
+                        </select>
+                    </div>
+                    <div class="col-auto">
+                        <a href="{{ url_for('reports_export', range=time_range) }}" class="btn btn-outline-primary">
+                            Export CSV
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Summary Statistics -->
+<div class="row mb-4">
+    <div class="col-md-3 mb-3">
+        <div class="card stat-card h-100">
+            <div class="card-body">
+                <div class="stat-value text-primary">{{ stats.reading_count }}</div>
+                <div class="stat-label">Total Readings</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 mb-3">
+        <div class="card stat-card h-100">
+            <div class="card-body">
+                <div class="stat-value">{{ "%.1f"|format(stats.temp_avg) }}°F</div>
+                <div class="stat-label">Average Temperature</div>
+                <small class="{% if stats.temp_trend > 0 %}trend-up{% elif stats.temp_trend < 0 %}trend-down{% else %}trend-stable{% endif %}">
+                    {% if stats.temp_trend > 0 %}↑{% elif stats.temp_trend < 0 %}↓{% else %}→{% endif %}
+                    {{ "%.1f"|format(stats.temp_trend|abs) }}°F from previous period
+                </small>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 mb-3">
+        <div class="card stat-card h-100">
+            <div class="card-body">
+                <div class="stat-value">{{ "%.1f"|format(stats.humidity_avg) }}%</div>
+                <div class="stat-label">Average Humidity</div>
+                <small class="{% if stats.humidity_trend > 0 %}trend-up{% elif stats.humidity_trend < 0 %}trend-down{% else %}trend-stable{% endif %}">
+                    {% if stats.humidity_trend > 0 %}↑{% elif stats.humidity_trend < 0 %}↓{% else %}→{% endif %}
+                    {{ "%.1f"|format(stats.humidity_trend|abs) }}% from previous period
+                </small>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 mb-3">
+        <div class="card stat-card h-100">
+            <div class="card-body">
+                <div class="stat-value text-{% if stats.alerts > 0 %}danger{% else %}success{% endif %}">
+                    {{ stats.alerts }}
+                </div>
+                <div class="stat-label">Out-of-Range Alerts</div>
+                <small class="text-muted">Temp &lt;65°F or &gt;80°F</small>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Temperature & Humidity Charts -->
+<div class="row mb-4">
+    <div class="col-md-6 mb-3">
+        <div class="card h-100">
+            <div class="card-header">
+                <h5 class="mb-0">Temperature Trend</h5>
+            </div>
+            <div class="card-body">
+                <div class="chart-container">
+                    <canvas id="tempChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 mb-3">
+        <div class="card h-100">
+            <div class="card-header">
+                <h5 class="mb-0">Humidity Trend</h5>
+            </div>
+            <div class="card-body">
+                <div class="chart-container">
+                    <canvas id="humidityChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Min/Max/Avg Table -->
+<div class="row mb-4">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">Statistical Summary</h5>
+            </div>
+            <div class="card-body p-0">
+                <table class="table table-striped mb-0">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Metric</th>
+                            <th>Minimum</th>
+                            <th>Maximum</th>
+                            <th>Average</th>
+                            <th>Std Deviation</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Temperature (°F)</strong></td>
+                            <td>{{ "%.1f"|format(stats.temp_min) }}°F</td>
+                            <td>{{ "%.1f"|format(stats.temp_max) }}°F</td>
+                            <td>{{ "%.1f"|format(stats.temp_avg) }}°F</td>
+                            <td>{{ "%.2f"|format(stats.temp_std) }}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Humidity (%)</strong></td>
+                            <td>{{ "%.1f"|format(stats.humidity_min) }}%</td>
+                            <td>{{ "%.1f"|format(stats.humidity_max) }}%</td>
+                            <td>{{ "%.1f"|format(stats.humidity_avg) }}%</td>
+                            <td>{{ "%.2f"|format(stats.humidity_std) }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Daily/Hourly Breakdown -->
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">Hourly Averages (Last 24 Hours)</h5>
+            </div>
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-sm table-hover mb-0">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>Hour</th>
+                                <th>Readings</th>
+                                <th>Avg Temp (°F)</th>
+                                <th>Avg Humidity (%)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for hour in hourly_data %}
+                            <tr>
+                                <td>{{ hour.hour }}</td>
+                                <td>{{ hour.count }}</td>
+                                <td>{{ "%.1f"|format(hour.temp_avg) }}</td>
+                                <td>{{ "%.1f"|format(hour.humidity_avg) }}</td>
+                            </tr>
+                            {% else %}
+                            <tr>
+                                <td colspan="4" class="text-center text-muted py-3">
+                                    No data available for the selected time range
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<!-- Chart data passed via JSON (CSP-compliant, no inline script) -->
+<script type="application/json" id="chart-data">
+{
+    "labels": {{ chart_labels | safe }},
+    "tempData": {{ chart_temp_data | safe }},
+    "humidityData": {{ chart_humidity_data | safe }}
+}
+</script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script src="{{ url_for('static', filename='js/charts.js') }}"></script>
+{% endblock %}

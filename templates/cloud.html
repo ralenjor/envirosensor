@@ -1,0 +1,165 @@
+{% extends "base.html" %}
+
+{% block title %}Cloud Status - Environmental Sensor System{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <h1 class="mb-4">Cloud Archival & Backup Status</h1>
+        <p class="text-muted">
+            Status of cloud-based archival and backup synchronization services.
+        </p>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <!-- Primary Backup Status -->
+    <div class="col-md-6 mb-4">
+        <div class="card border-success">
+            <div class="card-header bg-success text-white">
+                <h5 class="mb-0">Primary Backup Service</h5>
+            </div>
+            <div class="card-body">
+                <table class="table table-sm mb-0">
+                    <tr>
+                        <th>Status:</th>
+                        <td><span class="badge bg-success">Connected</span></td>
+                    </tr>
+                    <tr>
+                        <th>Provider:</th>
+                        <td>AWS S3 (us-east-1)</td>
+                    </tr>
+                    <tr>
+                        <th>Last Sync:</th>
+                        <td>{{ last_sync_primary }}</td>
+                    </tr>
+                    <tr>
+                        <th>Next Scheduled:</th>
+                        <td>{{ next_sync_primary }}</td>
+                    </tr>
+                    <tr>
+                        <th>Data Transferred:</th>
+                        <td>{{ data_transferred_primary }} MB</td>
+                    </tr>
+                    <tr>
+                        <th>Retention Policy:</th>
+                        <td>90 days</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Secondary Backup Status -->
+    <div class="col-md-6 mb-4">
+        <div class="card border-info">
+            <div class="card-header bg-info text-white">
+                <h5 class="mb-0">Secondary Backup Service</h5>
+            </div>
+            <div class="card-body">
+                <table class="table table-sm mb-0">
+                    <tr>
+                        <th>Status:</th>
+                        <td><span class="badge bg-success">Connected</span></td>
+                    </tr>
+                    <tr>
+                        <th>Provider:</th>
+                        <td>Azure Blob Storage (East US)</td>
+                    </tr>
+                    <tr>
+                        <th>Last Sync:</th>
+                        <td>{{ last_sync_secondary }}</td>
+                    </tr>
+                    <tr>
+                        <th>Next Scheduled:</th>
+                        <td>{{ next_sync_secondary }}</td>
+                    </tr>
+                    <tr>
+                        <th>Data Transferred:</th>
+                        <td>{{ data_transferred_secondary }} MB</td>
+                    </tr>
+                    <tr>
+                        <th>Retention Policy:</th>
+                        <td>365 days</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Sync History -->
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">Recent Synchronization History</h5>
+            </div>
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover mb-0">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>Timestamp</th>
+                                <th>Service</th>
+                                <th>Operation</th>
+                                <th>Files</th>
+                                <th>Size</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for entry in sync_history %}
+                            <tr>
+                                <td>{{ entry.timestamp }}</td>
+                                <td>{{ entry.service }}</td>
+                                <td>{{ entry.operation }}</td>
+                                <td>{{ entry.files }}</td>
+                                <td>{{ entry.size }} MB</td>
+                                <td>
+                                    {% if entry.status == 'Success' %}
+                                    <span class="badge bg-success">{{ entry.status }}</span>
+                                    {% elif entry.status == 'In Progress' %}
+                                    <span class="badge bg-warning text-dark">{{ entry.status }}</span>
+                                    {% else %}
+                                    <span class="badge bg-danger">{{ entry.status }}</span>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Storage Summary -->
+<div class="row mt-4">
+    <div class="col-md-4 mb-4">
+        <div class="card text-center">
+            <div class="card-body">
+                <h3 class="text-primary">{{ total_archived }} GB</h3>
+                <p class="text-muted mb-0">Total Archived Data</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-4">
+        <div class="card text-center">
+            <div class="card-body">
+                <h3 class="text-success">{{ sync_success_rate }}%</h3>
+                <p class="text-muted mb-0">Sync Success Rate (30 days)</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-4">
+        <div class="card text-center">
+            <div class="card-body">
+                <h3 class="text-info">{{ days_since_failure }}</h3>
+                <p class="text-muted mb-0">Days Since Last Failure</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

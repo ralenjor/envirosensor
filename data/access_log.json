@@ -1,0 +1,679 @@
+{
+  "entries": [
+    {
+      "timestamp": "2026-03-10T18:47:43.294547",
+      "ip_address": "127.0.0.1",
+      "url": "/admin/sensor",
+      "http_code": 200,
+      "username": "admin",
+      "event_type": "page_access",
+      "details": "Method: GET"
+    },
+    {
+      "timestamp": "2026-03-10T18:47:47.909125",
+      "ip_address": "127.0.0.1",
+      "url": "/sensor-data",
+      "http_code": 200,
+      "username": "admin",
+      "event_type": "page_access",
+      "details": "Method: GET"
+    },
+    {
+      "timestamp": "2026-03-10T18:47:48.828844",
+      "ip_address": "127.0.0.1",
+      "url": "/home",
+      "http_code": 200,
+      "username": "admin",
+      "event_type": "page_access",
+      "details": "Method: GET"
+    },
+    {
+      "timestamp": "2026-03-10T18:47:52.098885",
+      "ip_address": "127.0.0.1",
+      "url": "/admin/sensor",
+      "http_code": 200,
+      "username": "admin",
+      "event_type": "page_access",
+      "details": "Method: GET"
+    },
+    {
+      "timestamp": "2026-03-10T18:47:56.144283",
+      "ip_address": "127.0.0.1",
+      "url": "/reports",
+      "http_code": 200,
+      "username": "admin",
+      "event_type": "page_access",
+      "details": "Method: GET"
+    },
+    {
+      "timestamp": "2026-03-10T18:47:59.384707",
+      "ip_address": "127.0.0.1",
+      "url": "/home",
+      "http_code": 200,
+      "username": "admin",
+      "event_type": "page_access",
+      "details": "Method: GET"
+    },
+    {
+      "timestamp": "2026-03-10T18:48:09.760360",
+      "ip_address": "127.0.0.1",
+      "url": "/ics",
+      "http_code": 200,
+      "username": "admin",
+      "event_type": "page_access",
+      "details": "Method: GET"
+    },
+    {
+      "timestamp": "2026-03-10T18:48:11.684885",
+      "ip_address": "127.0.0.1",
+      "url": "/ics/generate",
+      "http_code": 200,
+      "username": "admin",
+      "event_type": "admin_action",
+      "details": "Action: generate, Target: sensor_data, Generated 96 readings for 24 hours"
+    },
+    {
+      "timestamp": "2026-03-10T18:48:11.687756",
+      "ip_address": "127.0.0.1",
+      "url": "/ics",
+      "http_code": 200,
+      "username": "admin",
+      "event_type": "page_access",
+      "details": "Method: GET"
+    },
+    {
+      "timestamp": "2026-03-10T18:48:16.552973",
+      "ip_address": "127.0.0.1",
+      "url": "/reports",
+      "http_code": 200,
+      "username": "admin",
+      "event_type": "page_access",
+      "details": "Method: GET"
+    },
+    {
+      "timestamp": "2026-03-10T19:00:19.700288",
+      "ip_address": "127.0.0.1",
+      "url": "/reports",
+      "http_code": 200,
+      "username": "admin",
+      "event_type": "page_access",
+      "details": "Method: GET"
+    },
+    {
+      "timestamp": "2026-03-10T19:00:22.297906",
+      "ip_address": "127.0.0.1",
+      "url": "/home",
+      "http_code": 200,
+      "username": "admin",
+      "event_type": "page_access",
+      "details": "Method: GET"
+    },
+    {
+      "timestamp": "2026-03-10T19:00:36.363777",
+      "ip_address": "127.0.0.1",
+      "url": "/home",
+      "http_code": 200,
+      "username": "admin",
+      "event_type": "page_access",
+      "details": "Method: GET"
+    },
+    {
+      "timestamp": "2026-03-10T19:00:39.273505",
+      "ip_address": "127.0.0.1",
+      "url": "/home",
+      "http_code": 200,
+      "username": "admin",
+      "event_type": "page_access",
+      "details": "Method: GET"
+    },
+    {
+      "timestamp": "2026-03-10T19:00:49.367175",
+      "ip_address": "127.0.0.1",
+      "url": "/sensor-data",
+      "http_code": 200,
+      "username": "admin",
+      "event_type": "page_access",
+      "details": "Method: GET"
+    },
+    {
+      "timestamp": "2026-03-10T19:00:52.199443",
+      "ip_address": "127.0.0.1",
+      "url": "/home",
+      "http_code": 200,
+      "username": "admin",
+      "event_type": "page_access",
+      "details": "Method: GET"
+    },
+    {
+      "timestamp": "2026-03-10T19:00:53.065926",
+      "ip_address": "127.0.0.1",
+      "url": "/reports",
+      "http_code": 200,
+      "username": "admin",
+      "event_type": "page_access",
+      "details": "Method: GET"
+    },
+    {
+      "timestamp": "2026-03-10T22:13:34.664644",
+      "ip_address": "127.0.0.1",
+      "url": "/notice",
+      "http_code": 200,
+      "username": null,
+      "event_type": "page_access",
+      "details": "Method: GET"
+    },
+    {
+      "timestamp": "2026-03-10T22:14:15.913053",
+      "ip_address": "127.0.0.1",
+      "url": "/login",
+      "http_code": 200,
+      "username": null,
+      "event_type": "page_access",
+      "details": "Method: GET"
+    },
+    {
+      "timestamp": "2026-03-10T22:14:53.217064",
+      "ip_address": "127.0.0.1",
+      "url": "/login",
+      "http_code": 200,
+      "username": "admin",
+      "event_type": "login",
+      "details": "Login successful"
+    },
+    {
+      "timestamp": "2026-03-10T22:14:53.220743",
+      "ip_address": "127.0.0.1",
+      "url": "/welcome",
+      "http_code": 200,
+      "username": "admin",
+      "event_type": "page_access",
+      "details": "Method: GET"
+    },
+    {
+      "timestamp": "2026-03-10T22:14:54.811001",
+      "ip_address": "127.0.0.1",
+      "url": "/home",
+      "http_code": 200,
+      "username": "admin",
+      "event_type": "page_access",
+      "details": "Method: GET"
+    },
+    {
+      "timestamp": "2026-03-10T22:14:56.551745",
+      "ip_address": "127.0.0.1",
+      "url": "/admin/users",
+      "http_code": 200,
+      "username": "admin",
+      "event_type": "page_access",
+      "details": "Method: GET"
+    },
+    {
+      "timestamp": "2026-03-10T22:15:42.589466",
+      "ip_address": "127.0.0.1",
+      "url": "/logout",
+      "http_code": 200,
+      "username": "admin",
+      "event_type": "logout",
+      "details": "User logged out"
+    },
+    {
+      "timestamp": "2026-03-10T22:15:42.595487",
+      "ip_address": "127.0.0.1",
+      "url": "/notice",
+      "http_code": 200,
+      "username": null,
+      "event_type": "page_access",
+      "details": "Method: GET"
+    },
+    {
+      "timestamp": "2026-03-10T22:15:43.560484",
+      "ip_address": "127.0.0.1",
+      "url": "/login",
+      "http_code": 200,
+      "username": null,
+      "event_type": "page_access",
+      "details": "Method: GET"
+    },
+    {
+      "timestamp": "2026-03-10T22:15:57.596512",
+      "ip_address": "127.0.0.1",
+      "url": "/login",
+      "http_code": 200,
+      "username": "user1",
+      "event_type": "login",
+      "details": "Login successful"
+    },
+    {
+      "timestamp": "2026-03-10T22:15:57.600095",
+      "ip_address": "127.0.0.1",
+      "url": "/welcome",
+      "http_code": 200,
+      "username": "user1",
+      "event_type": "page_access",
+      "details": "Method: GET"
+    },
+    {
+      "timestamp": "2026-03-10T22:15:59.388747",
+      "ip_address": "127.0.0.1",
+      "url": "/home",
+      "http_code": 200,
+      "username": "user1",
+      "event_type": "page_access",
+      "details": "Method: GET"
+    },
+    {
+      "timestamp": "2026-03-10T22:16:01.083046",
+      "ip_address": "127.0.0.1",
+      "url": "/sensor-data",
+      "http_code": 200,
+      "username": "user1",
+      "event_type": "page_access",
+      "details": "Method: GET"
+    },
+    {
+      "timestamp": "2026-03-10T22:16:06.753239",
+      "ip_address": "127.0.0.1",
+      "url": "/cloud",
+      "http_code": 200,
+      "username": "user1",
+      "event_type": "page_access",
+      "details": "Method: GET"
+    },
+    {
+      "timestamp": "2026-03-10T22:16:07.897759",
+      "ip_address": "127.0.0.1",
+      "url": "/reports",
+      "http_code": 200,
+      "username": "user1",
+      "event_type": "page_access",
+      "details": "Method: GET"
+    },
+    {
+      "timestamp": "2026-03-10T22:16:10.266304",
+      "ip_address": "127.0.0.1",
+      "url": "/sensor-data",
+      "http_code": 200,
+      "username": "user1",
+      "event_type": "page_access",
+      "details": "Method: GET"
+    },
+    {
+      "timestamp": "2026-03-10T22:16:46.425889",
+      "ip_address": "127.0.0.1",
+      "url": "/logout",
+      "http_code": 200,
+      "username": "user1",
+      "event_type": "logout",
+      "details": "User logged out"
+    },
+    {
+      "timestamp": "2026-03-10T22:16:46.429336",
+      "ip_address": "127.0.0.1",
+      "url": "/notice",
+      "http_code": 200,
+      "username": null,
+      "event_type": "page_access",
+      "details": "Method: GET"
+    },
+    {
+      "timestamp": "2026-03-10T22:16:47.492981",
+      "ip_address": "127.0.0.1",
+      "url": "/login",
+      "http_code": 200,
+      "username": null,
+      "event_type": "page_access",
+      "details": "Method: GET"
+    },
+    {
+      "timestamp": "2026-03-10T22:16:49.395341",
+      "ip_address": "127.0.0.1",
+      "url": "/login",
+      "http_code": 200,
+      "username": "admin",
+      "event_type": "login",
+      "details": "Login successful"
+    },
+    {
+      "timestamp": "2026-03-10T22:16:49.399040",
+      "ip_address": "127.0.0.1",
+      "url": "/welcome",
+      "http_code": 200,
+      "username": "admin",
+      "event_type": "page_access",
+      "details": "Method: GET"
+    },
+    {
+      "timestamp": "2026-03-10T22:16:51.324458",
+      "ip_address": "127.0.0.1",
+      "url": "/home",
+      "http_code": 200,
+      "username": "admin",
+      "event_type": "page_access",
+      "details": "Method: GET"
+    },
+    {
+      "timestamp": "2026-03-10T22:16:54.976137",
+      "ip_address": "127.0.0.1",
+      "url": "/admin/sensor",
+      "http_code": 200,
+      "username": "admin",
+      "event_type": "page_access",
+      "details": "Method: GET"
+    },
+    {
+      "timestamp": "2026-03-10T22:19:57.825967",
+      "ip_address": "127.0.0.1",
+      "url": "/home",
+      "http_code": 200,
+      "username": "admin",
+      "event_type": "page_access",
+      "details": "Method: GET"
+    },
+    {
+      "timestamp": "2026-03-10T22:20:10.608711",
+      "ip_address": "127.0.0.1",
+      "url": "/logout",
+      "http_code": 200,
+      "username": "admin",
+      "event_type": "logout",
+      "details": "User logged out"
+    },
+    {
+      "timestamp": "2026-03-10T22:20:10.612261",
+      "ip_address": "127.0.0.1",
+      "url": "/notice",
+      "http_code": 200,
+      "username": null,
+      "event_type": "page_access",
+      "details": "Method: GET"
+    },
+    {
+      "timestamp": "2026-03-10T22:20:11.891491",
+      "ip_address": "127.0.0.1",
+      "url": "/login",
+      "http_code": 200,
+      "username": null,
+      "event_type": "page_access",
+      "details": "Method: GET"
+    },
+    {
+      "timestamp": "2026-03-10T22:20:19.869494",
+      "ip_address": "127.0.0.1",
+      "url": "/login",
+      "http_code": 401,
+      "username": "user",
+      "event_type": "login",
+      "details": "Login failed: Invalid credentials"
+    },
+    {
+      "timestamp": "2026-03-10T22:20:19.870586",
+      "ip_address": "127.0.0.1",
+      "url": "/login",
+      "http_code": 401,
+      "username": null,
+      "event_type": "page_access",
+      "details": "Method: POST"
+    },
+    {
+      "timestamp": "2026-03-10T22:20:29.581027",
+      "ip_address": "127.0.0.1",
+      "url": "/login",
+      "http_code": 401,
+      "username": "user",
+      "event_type": "login",
+      "details": "Login failed: Invalid credentials"
+    },
+    {
+      "timestamp": "2026-03-10T22:20:29.581907",
+      "ip_address": "127.0.0.1",
+      "url": "/login",
+      "http_code": 401,
+      "username": null,
+      "event_type": "page_access",
+      "details": "Method: POST"
+    },
+    {
+      "timestamp": "2026-03-10T22:20:45.402962",
+      "ip_address": "127.0.0.1",
+      "url": "/login",
+      "http_code": 200,
+      "username": "user1",
+      "event_type": "login",
+      "details": "Login successful"
+    },
+    {
+      "timestamp": "2026-03-10T22:20:45.406328",
+      "ip_address": "127.0.0.1",
+      "url": "/welcome",
+      "http_code": 200,
+      "username": "user1",
+      "event_type": "page_access",
+      "details": "Method: GET"
+    },
+    {
+      "timestamp": "2026-03-10T22:20:48.162210",
+      "ip_address": "127.0.0.1",
+      "url": "/home",
+      "http_code": 200,
+      "username": "user1",
+      "event_type": "page_access",
+      "details": "Method: GET"
+    },
+    {
+      "timestamp": "2026-03-10T22:21:09.194951",
+      "ip_address": "127.0.0.1",
+      "url": "/sensor-data",
+      "http_code": 200,
+      "username": "user1",
+      "event_type": "page_access",
+      "details": "Method: GET"
+    },
+    {
+      "timestamp": "2026-03-10T22:22:01.760551",
+      "ip_address": "127.0.0.1",
+      "url": "/logout",
+      "http_code": 200,
+      "username": "user1",
+      "event_type": "logout",
+      "details": "User logged out"
+    },
+    {
+      "timestamp": "2026-03-10T22:22:01.767405",
+      "ip_address": "127.0.0.1",
+      "url": "/notice",
+      "http_code": 200,
+      "username": null,
+      "event_type": "page_access",
+      "details": "Method: GET"
+    },
+    {
+      "timestamp": "2026-03-10T22:23:39.907790",
+      "ip_address": "127.0.0.1",
+      "url": "/login",
+      "http_code": 200,
+      "username": null,
+      "event_type": "page_access",
+      "details": "Method: GET"
+    },
+    {
+      "timestamp": "2026-03-10T22:23:47.099881",
+      "ip_address": "127.0.0.1",
+      "url": "/login",
+      "http_code": 401,
+      "username": "user1",
+      "event_type": "login",
+      "details": "Login failed: Invalid credentials"
+    },
+    {
+      "timestamp": "2026-03-10T22:23:47.101171",
+      "ip_address": "127.0.0.1",
+      "url": "/login",
+      "http_code": 401,
+      "username": null,
+      "event_type": "page_access",
+      "details": "Method: POST"
+    },
+    {
+      "timestamp": "2026-03-10T22:23:52.012346",
+      "ip_address": "127.0.0.1",
+      "url": "/login",
+      "http_code": 401,
+      "username": "user1",
+      "event_type": "login",
+      "details": "Login failed: Invalid credentials"
+    },
+    {
+      "timestamp": "2026-03-10T22:23:52.013678",
+      "ip_address": "127.0.0.1",
+      "url": "/login",
+      "http_code": 401,
+      "username": null,
+      "event_type": "page_access",
+      "details": "Method: POST"
+    },
+    {
+      "timestamp": "2026-03-10T22:23:56.254114",
+      "ip_address": "127.0.0.1",
+      "url": "/login",
+      "http_code": 401,
+      "username": "user1",
+      "event_type": "login",
+      "details": "Login failed: Invalid credentials"
+    },
+    {
+      "timestamp": "2026-03-10T22:23:56.255221",
+      "ip_address": "127.0.0.1",
+      "url": "/login",
+      "http_code": 401,
+      "username": null,
+      "event_type": "page_access",
+      "details": "Method: POST"
+    },
+    {
+      "timestamp": "2026-03-10T22:24:00.478446",
+      "ip_address": "127.0.0.1",
+      "url": "/login",
+      "http_code": 403,
+      "username": "user1",
+      "event_type": "lockout",
+      "details": "Account locked due to excessive failed login attempts"
+    },
+    {
+      "timestamp": "2026-03-10T22:24:00.484284",
+      "ip_address": "127.0.0.1",
+      "url": "/login",
+      "http_code": 401,
+      "username": null,
+      "event_type": "page_access",
+      "details": "Method: POST"
+    },
+    {
+      "timestamp": "2026-03-10T22:25:25.929385",
+      "ip_address": "127.0.0.1",
+      "url": "/login",
+      "http_code": 200,
+      "username": "admin",
+      "event_type": "login",
+      "details": "Login successful"
+    },
+    {
+      "timestamp": "2026-03-10T22:25:25.932878",
+      "ip_address": "127.0.0.1",
+      "url": "/welcome",
+      "http_code": 200,
+      "username": "admin",
+      "event_type": "page_access",
+      "details": "Method: GET"
+    },
+    {
+      "timestamp": "2026-03-10T22:25:28.917094",
+      "ip_address": "127.0.0.1",
+      "url": "/home",
+      "http_code": 200,
+      "username": "admin",
+      "event_type": "page_access",
+      "details": "Method: GET"
+    },
+    {
+      "timestamp": "2026-03-10T22:25:30.217801",
+      "ip_address": "127.0.0.1",
+      "url": "/logout",
+      "http_code": 200,
+      "username": "admin",
+      "event_type": "logout",
+      "details": "User logged out"
+    },
+    {
+      "timestamp": "2026-03-10T22:25:30.222443",
+      "ip_address": "127.0.0.1",
+      "url": "/notice",
+      "http_code": 200,
+      "username": null,
+      "event_type": "page_access",
+      "details": "Method: GET"
+    },
+    {
+      "timestamp": "2026-03-10T22:26:32.774817",
+      "ip_address": "127.0.0.1",
+      "url": "/login",
+      "http_code": 200,
+      "username": null,
+      "event_type": "page_access",
+      "details": "Method: GET"
+    },
+    {
+      "timestamp": "2026-03-10T22:26:33.773817",
+      "ip_address": "127.0.0.1",
+      "url": "/login",
+      "http_code": 200,
+      "username": "admin",
+      "event_type": "login",
+      "details": "Login successful"
+    },
+    {
+      "timestamp": "2026-03-10T22:26:33.777265",
+      "ip_address": "127.0.0.1",
+      "url": "/welcome",
+      "http_code": 200,
+      "username": "admin",
+      "event_type": "page_access",
+      "details": "Method: GET"
+    },
+    {
+      "timestamp": "2026-03-10T22:26:56.752582",
+      "ip_address": "127.0.0.1",
+      "url": "/home",
+      "http_code": 200,
+      "username": "admin",
+      "event_type": "page_access",
+      "details": "Method: GET"
+    },
+    {
+      "timestamp": "2026-03-10T22:27:40.959932",
+      "ip_address": "127.0.0.1",
+      "url": "/admin/users",
+      "http_code": 200,
+      "username": "admin",
+      "event_type": "page_access",
+      "details": "Method: GET"
+    },
+    {
+      "timestamp": "2026-03-10T22:36:13.627608",
+      "ip_address": "127.0.0.1",
+      "url": "/about",
+      "http_code": 200,
+      "username": "admin",
+      "event_type": "page_access",
+      "details": "Method: GET"
+    },
+    {
+      "timestamp": "2026-03-10T22:36:15.716790",
+      "ip_address": "127.0.0.1",
+      "url": "/admin/users",
+      "http_code": 200,
+      "username": "admin",
+      "event_type": "page_access",
+      "details": "Method: GET"
+    }
+  ]
+}

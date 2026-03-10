@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+
+{% block title %}About - Environmental Sensor System{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <h1 class="mb-4">About This System</h1>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-8">
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5 class="mb-0">Environmental Sensor Monitoring System</h5>
+            </div>
+            <div class="card-body">
+                <p>
+                    This web application provides authenticated access to Industrial Control System (ICS)
+                    environmental sensor data. It is designed to serve personnel who require visibility
+                    into facility environmental conditions, displaying temperature and relative humidity
+                    readings collected over the previous 24 hours.
+                </p>
+
+                <h6 class="mt-4">Key Features:</h6>
+                <ul>
+                    <li><strong>Real-time Monitoring:</strong> View current temperature and humidity readings from ICS environmental sensors</li>
+                    <li><strong>Historical Data:</strong> Access 24-hour historical data with summary statistics</li>
+                    <li><strong>Cloud Backup:</strong> Automatic synchronization with cloud archival services</li>
+                    <li><strong>Data Import:</strong> Import sensor readings from external data files</li>
+                    <li><strong>Role-based Access:</strong> Separate user and administrator privileges</li>
+                    <li><strong>Audit Logging:</strong> Comprehensive logging of all system access and actions</li>
+                </ul>
+
+                <h6 class="mt-4">User Roles:</h6>
+                <ul>
+                    <li><strong>User:</strong> Read-only access to view environmental data and system status</li>
+                    <li><strong>Administrator:</strong> Full access including the ability to insert, update, and delete sensor records</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5 class="mb-0">Quick Links</h5>
+            </div>
+            <div class="card-body">
+                <div class="d-grid gap-2">
+                    <a href="{{ url_for('sensor_data') }}" class="btn btn-outline-primary">
+                        View Sensor Data
+                    </a>
+                    <a href="{{ url_for('reports') }}" class="btn btn-outline-primary">
+                        Reports & Analytics
+                    </a>
+                    <a href="{{ url_for('cloud_status') }}" class="btn btn-outline-primary">
+                        Cloud Status
+                    </a>
+                    <a href="{{ url_for('ics_import_page') }}" class="btn btn-outline-primary">
+                        Import Data
+                    </a>
+                    {% if user.role == 'administrator' %}
+                    <a href="{{ url_for('admin_sensor') }}" class="btn btn-outline-warning">
+                        Manage Sensor Data
+                    </a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">Support</h5>
+            </div>
+            <div class="card-body">
+                <p class="small text-muted mb-2">
+                    For technical support or to report issues, contact your system administrator.
+                </p>
+                <p class="small text-muted mb-0">
+                    <strong>Help Desk:</strong> ext. 4357<br>
+                    <strong>Email:</strong> support@yourmomshouse.com
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

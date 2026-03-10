@@ -1,0 +1,22 @@
+{
+  "users": [
+    {
+      "username": "admin",
+      "password_hash": "pbkdf2:sha256:1000000$tbPG6vOPAQQ1Z1vC$97c338aa4bd040a5ba7fc493439b6eb86f26cb00d5fb9865585aa121f8b24d63",
+      "role": "administrator",
+      "failed_attempts": 0,
+      "locked": false,
+      "locked_until": null,
+      "last_login": "2026-03-10T22:26:33.773295"
+    },
+    {
+      "username": "user1",
+      "password_hash": "pbkdf2:sha256:1000000$09JrMNPNrogpHHMV$1572f5fe199e8ae158ea38ce3f608e8bc731ffce52af77b91eb60f78e89aa87c",
+      "role": "user",
+      "failed_attempts": 4,
+      "locked": true,
+      "locked_until": "2026-03-10T22:39:00.477905",
+      "last_login": "2026-03-10T22:20:45.402477"
+    }
+  ]
+}
