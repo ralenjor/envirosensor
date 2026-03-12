@@ -5,11 +5,17 @@ Handles CRUD operations for users, sensor data, and access logs.
 
 import json
 import os
+import re
 import uuid
 from datetime import datetime, timedelta
-from typing import Optional
+from typing import Optional, Tuple
 from filelock import FileLock
 from werkzeug.security import generate_password_hash, check_password_hash
+
+
+class PasswordValidationError(Exception):
+    """Raised when password does not meet complexity requirements."""
+    pass
 
 
 class DataManager:
@@ -18,6 +24,28 @@ class DataManager:
     def __init__(self, config):
         self.config = config
         self._ensure_data_dir()
+
+    def validate_password(self, password: str) -> Tuple[bool, str]:
+        """
+        Validate password meets complexity requirements (VULN-011 fix).
+        Returns (is_valid, error_message).
+        """
+        if len(password) < self.config.PASSWORD_MIN_LENGTH:
+            return False, f"Password must be at least {self.config.PASSWORD_MIN_LENGTH} characters"
+
+        if self.config.PASSWORD_REQUIRE_UPPERCASE and not re.search(r'[A-Z]', password):
+            return False, "Password must contain at least one uppercase letter"
+
+        if self.config.PASSWORD_REQUIRE_LOWERCASE and not re.search(r'[a-z]', password):
+            return False, "Password must contain at least one lowercase letter"
+
+        if self.config.PASSWORD_REQUIRE_DIGIT and not re.search(r'\d', password):
+            return False, "Password must contain at least one digit"
+
+        if self.config.PASSWORD_REQUIRE_SPECIAL and not re.search(r'[!@#$%^&*(),.?":{}|<>\-_=+\[\]\\;\'`~]', password):
+            return False, "Password must contain at least one special character"
+
+        return True, ""
 
     def _ensure_data_dir(self):
         """Ensure data directory exists."""
@@ -56,19 +84,32 @@ class DataManager:
         users = data.get('users', [])
         return [{k: v for k, v in u.items() if k != 'password_hash'} for u in users]
 
-    def create_user(self, username: str, password: str, role: str) -> bool:
-        """Create a new user with hashed password."""
+    def create_user(self, username: str, password: str, role: str,
+                    skip_password_validation: bool = False) -> Tuple[bool, str]:
+        """
+        Create a new user with hashed password.
+        Returns (success, error_message).
+        """
         if self.get_user(username):
-            return False
+            return False, "Username already exists"
+
+        # VULN-011 fix: Validate password complexity
+        if not skip_password_validation:
+            is_valid, error_msg = self.validate_password(password)
+            if not is_valid:
+                return False, error_msg
 
         data = self._read_json(self.config.USERS_FILE)
         if 'users' not in data:
             data['users'] = []
 
+        # VULN-006 fix: Use more secure hashing method
+        # Using scrypt which is Werkzeug's modern secure default
+        hash_method = getattr(self.config, 'PASSWORD_HASH_METHOD_NEW',
+                              self.config.PASSWORD_HASH_METHOD)
         password_hash = generate_password_hash(
             password,
-            method=self.config.PASSWORD_HASH_METHOD,
-            salt_length=16
+            method=hash_method
         )
 
         new_user = {
@@ -83,7 +124,7 @@ class DataManager:
 
         data['users'].append(new_user)
         self._write_json(self.config.USERS_FILE, data)
-        return True
+        return True, ""
 
     def verify_password(self, username: str, password: str) -> bool:
         """Verify user password."""

@@ -9,6 +9,7 @@ Provides:
 """
 
 import secrets
+from datetime import datetime
 from functools import wraps
 from flask import session, redirect, url_for, request, abort, g
 
@@ -79,19 +80,26 @@ def admin_required(f):
 def login_user(username: str, role: str, last_login: str = None):
     """
     Log in a user by setting session variables.
-    Regenerates session to prevent session fixation attacks.
+    Regenerates session to prevent session fixation attacks (VULN-010 fix).
     """
     # Store previous login for display
     previous_login = last_login
 
-    # Regenerate session (clear and recreate)
+    # VULN-010 fix: Complete session regeneration
+    # Clear all existing session data first
     session.clear()
+
+    # Force session modification to trigger new session ID generation
+    # by setting a new session identifier timestamp
+    session['_session_regenerated_at'] = secrets.token_hex(16)
 
     # Set new session data
     session['username'] = username
     session['role'] = role
     session['previous_login'] = previous_login
+    session['_login_time'] = datetime.utcnow().isoformat()
     session.permanent = True
+    session.modified = True  # Ensure session is marked as modified
 
     # Generate new CSRF token
     generate_csrf_token()

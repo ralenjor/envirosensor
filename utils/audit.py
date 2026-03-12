@@ -9,6 +9,7 @@ Logs the following events:
 - Admin CRUD operations (AC-6 privileged function logging)
 """
 
+import ipaddress
 from flask import request, session
 from functools import wraps
 
@@ -16,15 +17,52 @@ from functools import wraps
 class AuditLogger:
     """Handles audit logging to the access log file."""
 
-    def __init__(self, data_manager):
+    def __init__(self, data_manager, config=None):
         self.dm = data_manager
+        self.config = config
+        self.trusted_proxies = set()
+        if config and hasattr(config, 'TRUSTED_PROXIES'):
+            for proxy in config.TRUSTED_PROXIES:
+                proxy = proxy.strip()
+                if proxy:
+                    self.trusted_proxies.add(proxy)
+
+    def _is_trusted_proxy(self, ip):
+        """Check if IP is a trusted proxy (VULN-008 fix)."""
+        if not ip or not self.trusted_proxies:
+            return False
+        try:
+            client_ip = ipaddress.ip_address(ip)
+            for proxy in self.trusted_proxies:
+                try:
+                    if '/' in proxy:
+                        # CIDR notation
+                        if client_ip in ipaddress.ip_network(proxy, strict=False):
+                            return True
+                    else:
+                        if client_ip == ipaddress.ip_address(proxy):
+                            return True
+                except ValueError:
+                    continue
+            return False
+        except ValueError:
+            return False
 
     def _get_client_ip(self):
-        """Get client IP address, handling proxies."""
-        # Check for forwarded header (behind proxy)
-        if request.headers.get('X-Forwarded-For'):
-            return request.headers.get('X-Forwarded-For').split(',')[0].strip()
-        return request.remote_addr or 'unknown'
+        """
+        Get client IP address, handling proxies securely (VULN-008 fix).
+        Only trust X-Forwarded-For when request comes from trusted proxy.
+        """
+        remote_addr = request.remote_addr or 'unknown'
+
+        # Only trust X-Forwarded-For if request is from a trusted proxy
+        if self._is_trusted_proxy(remote_addr):
+            forwarded_for = request.headers.get('X-Forwarded-For')
+            if forwarded_for:
+                # Take the first (client) IP from the chain
+                return forwarded_for.split(',')[0].strip()
+
+        return remote_addr
 
     def _get_username(self):
         """Get current username from session."""

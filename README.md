@@ -9,20 +9,30 @@ This project demonstrates implementation of federal security standards:
 | NIST Control | Implementation |
 |--------------|----------------|
 | **AC-2** Account Management | Role-based access (user/administrator), failed attempt tracking, last login notification |
-| **AC-7** Unsuccessful Logon Attempts | Account lockout after 4 failed attempts for 15 minutes |
+| **AC-7** Unsuccessful Logon Attempts | Account lockout after 4 failed attempts, IP-based rate limiting (5/min) |
 | **AC-8** System Use Notification | Mandatory acknowledgment banner before login |
 | **AC-9** Previous Logon Notification | Displays last successful login timestamp |
-| **AU-2** Event Logging | Comprehensive audit trail of all access and admin actions |
-| **IA-2** Identification & Authentication | Username/password with PBKDF2-SHA256 hashing (600k iterations) |
-| **SA-11** Developer Security Testing | Static analysis with Bandit (see `banditresults.txt`) |
+| **AU-2/AU-3** Event Logging | Comprehensive audit trail with validated IP logging via trusted proxy configuration |
+| **IA-2** Identification & Authentication | Username/password with scrypt hashing (backward compatible with PBKDF2) |
+| **IA-5** Authenticator Management | Password complexity requirements (12+ chars, mixed case, digits, special chars) |
+| **SA-11** Developer Security Testing | Static analysis with Bandit, security review (see `securityreview.txt`) |
+| **SC-5** Denial of Service Protection | Rate limiting via Flask-Limiter, file upload size limits |
+| **SC-8/SC-23** Session Security | HSTS headers, secure cookies in production, session regeneration |
+| **SI-10** Input Validation | File upload validation, sensor ID whitelist, CSV injection prevention |
+| **SI-11** Error Handling | Generic authentication error messages to prevent username enumeration |
 
 ### Security Implementation Details
 
 - **CSRF Protection**: Per-session tokens with constant-time comparison
-- **Session Security**: HttpOnly cookies, SameSite=Lax, session regeneration on login
-- **Password Storage**: Werkzeug's PBKDF2-SHA256 with per-user salt
-- **Security Headers**: CSP, X-Frame-Options, X-Content-Type-Options, X-XSS-Protection
-- **Input Validation**: Server-side validation on all form inputs
+- **Session Security**: HttpOnly cookies, SameSite=Lax, Secure flag in production, session regeneration on login with fixation protection
+- **Password Storage**: Werkzeug's scrypt with per-user salt (backward compatible with existing PBKDF2 hashes)
+- **Password Policy**: Minimum 12 characters with uppercase, lowercase, digit, and special character requirements
+- **Security Headers**: CSP, X-Frame-Options, X-Content-Type-Options, X-XSS-Protection, HSTS
+- **Rate Limiting**: Flask-Limiter enforces 5 login attempts per minute per IP (prevents password spraying)
+- **Input Validation**: Server-side validation on all form inputs, sensor ID whitelist, CSV output sanitization
+- **File Upload Security**: Extension whitelist (.json, .csv), 10MB size limit, content structure validation
+- **IP Logging**: Trusted proxy validation prevents X-Forwarded-For spoofing
+- **Error Handling**: Generic authentication errors prevent username enumeration
 - **File Locking**: Thread-safe JSON operations using `filelock`
 
 ## Quick Start
@@ -67,15 +77,18 @@ envirosensor/
 ├── config.py              # Configuration and security settings
 ├── requirements.txt       # Python dependencies
 ├── .env.example           # Environment template (copy to .env)
+├── securityreview.txt     # Security audit findings and remediation status
 │
 ├── utils/
 │   ├── auth.py            # Authentication decorators and session management
-│   ├── audit.py           # NIST AU-2 compliant audit logging
-│   ├── data_manager.py    # Thread-safe JSON CRUD operations
+│   ├── audit.py           # NIST AU-2 compliant audit logging with trusted proxy support
+│   ├── data_manager.py    # Thread-safe JSON CRUD with password validation
 │   ├── data_generator.py  # Simulated sensor data generation
 │   └── setup_users.py     # Demo user initialization script
 │
 ├── templates/             # Jinja2 templates with Bootstrap 5
+│   └── errors/
+│       └── 429.html       # Rate limit exceeded error page
 ├── static/                # CSS and JavaScript assets
 └── data/                  # JSON data storage
     ├── users.json         # User accounts (hashed passwords)
@@ -96,21 +109,34 @@ This project is configured for **demonstration and portfolio purposes**. The fol
 | `data/sensor_data.json` | Shows data structure | Database or time-series DB |
 | `utils/setup_users.py` | Shows user provisioning logic | Secure onboarding workflow, no hardcoded credentials |
 | `banditresults.txt` | Demonstrates security testing | Run in CI/CD, don't commit results |
+| `securityreview.txt` | Documents vulnerability assessment and remediation | Internal security documentation |
 
 ### Production Hardening Checklist
 
-For actual deployment, implement the following:
+Security controls implemented following security review (see `securityreview.txt`):
 
-- [ ] **HTTPS/TLS**: Set `SESSION_COOKIE_SECURE = True`
-- [ ] **HSTS Header**: `Strict-Transport-Security: max-age=31536000`
-- [ ] **Rate Limiting**: Add Flask-Limiter for brute-force protection
+- [x] **HTTPS/TLS**: `SESSION_COOKIE_SECURE = True` when `FLASK_ENV=production`
+- [x] **HSTS Header**: `Strict-Transport-Security: max-age=31536000; includeSubDomains`
+- [x] **Rate Limiting**: Flask-Limiter (5 requests/minute on login endpoint)
+- [x] **Password Policy**: 12+ characters with complexity requirements enforced
+- [x] **File Upload Validation**: Extension whitelist, 10MB limit, content validation
+- [x] **Trusted Proxy Validation**: Configurable `TRUSTED_PROXIES` for accurate IP logging
+- [x] **Input Sanitization**: CSV injection prevention, sensor ID whitelist
+- [x] **Session Fixation Protection**: Session regeneration with token binding
+- [x] **Generic Error Messages**: Prevents username enumeration attacks
 - [ ] **Database**: Replace JSON files with PostgreSQL/MySQL
 - [ ] **Secrets Management**: Use AWS Secrets Manager, HashiCorp Vault, or similar
-- [ ] **Password Policy**: Enforce complexity requirements on user creation
-- [ ] **File Upload Validation**: Validate type, size, and content on ICS import
 - [ ] **Log Integrity**: Cryptographic chaining or external log server
 - [ ] **Monitoring**: Application performance monitoring and alerting
 - [ ] **WAF**: Web Application Firewall for additional protection
+
+### Security Review
+
+A comprehensive security review identified and remediated 11 vulnerabilities (see `securityreview.txt`):
+- **Critical**: Unvalidated file upload - now validates extension, size, and content
+- **High**: CSV injection, missing rate limiting, insecure session cookies - all remediated
+- **Medium**: Missing HSTS, username enumeration, IP spoofing, input validation - all remediated
+- **Low**: Session fixation, password complexity - all remediated
 
 ### Known Bandit Findings
 
@@ -118,6 +144,15 @@ Static analysis with Bandit reports low-severity findings that are **intentional
 
 - `B105` (hardcoded passwords): Demo credentials in `setup_users.py` - would use secure provisioning in production
 - `B311` (random): Used in `data_generator.py` for sensor simulation - not security-sensitive
+
+### Post-Deployment Checklist
+
+After deploying security updates:
+```bash
+pip install -r requirements.txt  # Install Flask-Limiter
+export FLASK_ENV=production      # Enable SESSION_COOKIE_SECURE
+export TRUSTED_PROXIES=10.0.0.0/8  # Configure if behind load balancer
+```
 
 ## API Routes
 
@@ -149,7 +184,7 @@ Static analysis with Bandit reports low-severity findings that are **intentional
 ## Technologies
 
 - **Backend**: Python 3.13, Flask 3.0
-- **Security**: Werkzeug (password hashing), secrets (CSRF tokens)
+- **Security**: Werkzeug (password hashing), secrets (CSRF tokens), Flask-Limiter (rate limiting)
 - **Frontend**: Bootstrap 5.3, Chart.js
 - **Data**: JSON with filelock for thread safety
 

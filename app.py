@@ -6,6 +6,7 @@ sensor data, compliant with FIPS 200 and NIST SP 800-53 security controls.
 """
 
 import os
+import re
 import json
 import math
 from datetime import datetime, timedelta
@@ -14,6 +15,9 @@ from flask import (
     session, flash, abort, Response
 )
 from dotenv import load_dotenv
+from werkzeug.utils import secure_filename
+from flask_limiter import Limiter
+from flask_limiter.util import get_remote_address
 
 # Load environment variables before importing config
 load_dotenv()
@@ -31,9 +35,20 @@ from utils.audit import AuditLogger
 app = Flask(__name__)
 app.config.from_object(Config)
 
+# Set max content length for file uploads (VULN-001 fix)
+app.config['MAX_CONTENT_LENGTH'] = Config.MAX_CONTENT_LENGTH
+
+# Initialize rate limiter (VULN-003 fix)
+limiter = Limiter(
+    key_func=get_remote_address,
+    app=app,
+    storage_uri=Config.RATELIMIT_STORAGE_URI,
+    default_limits=[Config.RATELIMIT_DEFAULT]
+)
+
 # Initialize data manager and audit logger
 data_manager = DataManager(Config)
-audit_logger = AuditLogger(data_manager)
+audit_logger = AuditLogger(data_manager, Config)
 
 
 # ==================== TEMPLATE CONTEXT ====================
@@ -59,6 +74,8 @@ def add_security_headers(response):
         "img-src 'self' data:; "
         "font-src 'self' https://cdn.jsdelivr.net;"
     )
+    # VULN-005 fix: Add HSTS header for HTTPS enforcement
+    response.headers['Strict-Transport-Security'] = 'max-age=31536000; includeSubDomains'
     return response
 
 
@@ -94,6 +111,13 @@ def internal_error(e):
     return render_template('errors/500.html', error=e), 500
 
 
+@app.errorhandler(429)
+def ratelimit_handler(e):
+    """Handle rate limit exceeded errors (VULN-003 fix)."""
+    audit_logger.log_error(429, "Rate limit exceeded")
+    return render_template('errors/429.html', error=e), 429
+
+
 # ==================== PUBLIC ROUTES ====================
 
 @app.route('/')
@@ -124,6 +148,7 @@ def acknowledge_notice():
 
 
 @app.route('/login', methods=['GET', 'POST'])
+@limiter.limit(Config.LOGIN_RATE_LIMIT, methods=['POST'])  # VULN-003 fix: IP rate limiting
 def login():
     """Handle user login."""
     # Redirect if already logged in
@@ -147,10 +172,14 @@ def login():
         if not username or not password:
             error = "Username and password are required"
         else:
+            # VULN-007 fix: Use generic error message to prevent username enumeration
+            generic_error = "Invalid username or password"
+
             # Check if account is locked
             if data_manager.is_account_locked(username):
-                error = "Account is locked. Please try again later or contact an administrator."
+                # Log the actual reason but show generic message
                 audit_logger.log_login_failure(username, "Account locked")
+                error = generic_error
             else:
                 # Verify credentials
                 if data_manager.verify_password(username, password):
@@ -173,12 +202,12 @@ def login():
                     attempts = data_manager.increment_failed_attempts(username)
 
                     if attempts >= Config.MAX_LOGIN_ATTEMPTS:
-                        error = "Account has been locked due to too many failed attempts"
                         audit_logger.log_lockout(username)
                     else:
-                        remaining = Config.MAX_LOGIN_ATTEMPTS - attempts
-                        error = f"Invalid username or password. {remaining} attempts remaining."
                         audit_logger.log_login_failure(username, "Invalid credentials")
+
+                    # VULN-007 fix: Always show generic error
+                    error = generic_error
 
     audit_logger.log_page_access(200 if not error else 401)
     return render_template('login.html', error=error)
@@ -280,6 +309,39 @@ def ics_import_page():
     return render_template('ics.html', user=get_current_user(), import_history=import_history)
 
 
+def allowed_file(filename):
+    """Check if file extension is allowed (VULN-001 fix)."""
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in Config.ALLOWED_UPLOAD_EXTENSIONS
+
+
+def validate_file_content(file, extension):
+    """Validate file content matches expected format (VULN-001 fix)."""
+    try:
+        content = file.read()
+        file.seek(0)  # Reset file pointer for later use
+
+        if extension == 'json':
+            data = json.loads(content.decode('utf-8'))
+            # Verify expected structure
+            if not isinstance(data, dict) or 'readings' not in data:
+                return False, "JSON must contain 'readings' array"
+            if not isinstance(data['readings'], list):
+                return False, "'readings' must be an array"
+            return True, None
+        elif extension == 'csv':
+            lines = content.decode('utf-8').strip().split('\n')
+            if len(lines) < 2:
+                return False, "CSV must have header and at least one data row"
+            header = lines[0].lower()
+            if 'timestamp' not in header or 'temperature' not in header:
+                return False, "CSV must contain timestamp and temperature columns"
+            return True, None
+        return False, "Unsupported file type"
+    except (json.JSONDecodeError, UnicodeDecodeError) as e:
+        return False, f"Invalid file format: {str(e)}"
+
+
 @app.route('/ics/import', methods=['POST'])
 @admin_required
 @csrf_protect
@@ -295,11 +357,35 @@ def ics_import():
         flash('No file selected', 'danger')
         return redirect(url_for('ics_import_page'))
 
-    # For now, just simulate a successful import
+    # VULN-001 fix: Validate file extension
+    if not allowed_file(file.filename):
+        flash(f'Invalid file type. Allowed types: {", ".join(Config.ALLOWED_UPLOAD_EXTENSIONS)}', 'danger')
+        audit_logger.log_admin_action('import_failed', 'sensor_data',
+                                       f'Rejected file: {file.filename} (invalid extension)')
+        return redirect(url_for('ics_import_page'))
+
+    # Secure the filename
+    filename = secure_filename(file.filename)
+    extension = filename.rsplit('.', 1)[1].lower()
+
+    # VULN-001 fix: Validate file content
+    is_valid, error_msg = validate_file_content(file, extension)
+    if not is_valid:
+        flash(f'Invalid file content: {error_msg}', 'danger')
+        audit_logger.log_admin_action('import_failed', 'sensor_data',
+                                       f'Rejected file: {filename} ({error_msg})')
+        return redirect(url_for('ics_import_page'))
+
+    # VULN-009 fix: Validate sensor_id
     sensor_id = request.form.get('sensor_id', 'SENSOR-001')
+    if sensor_id not in Config.VALID_SENSOR_IDS:
+        flash('Invalid sensor ID', 'danger')
+        return redirect(url_for('ics_import_page'))
+
+    # For now, just simulate a successful import
     audit_logger.log_admin_action('import', 'sensor_data',
-                                   f'File: {file.filename}, Sensor: {sensor_id}')
-    flash(f'File "{file.filename}" imported successfully', 'success')
+                                   f'File: {filename}, Sensor: {sensor_id}')
+    flash(f'File "{filename}" imported successfully', 'success')
     return redirect(url_for('ics_import_page'))
 
 
@@ -428,6 +514,20 @@ def reports():
                            hourly_data=hourly_data)
 
 
+def sanitize_csv_value(value):
+    """
+    Sanitize CSV value to prevent formula injection (VULN-002 fix).
+    Prefixes dangerous characters with a single quote to prevent
+    Excel/LibreOffice from interpreting them as formulas.
+    """
+    str_value = str(value)
+    # Characters that can trigger formula execution in spreadsheets
+    dangerous_chars = ('=', '@', '+', '-', '\t', '\r', '\n')
+    if str_value.startswith(dangerous_chars):
+        return "'" + str_value
+    return str_value
+
+
 @app.route('/reports/export')
 @login_required
 def reports_export():
@@ -437,10 +537,14 @@ def reports_export():
 
     readings = data_manager.get_sensor_readings(hours=time_range)
 
-    # Build CSV content
+    # Build CSV content with sanitization (VULN-002 fix)
     csv_lines = ['timestamp,sensor_id,temperature_f,humidity_percent']
     for r in readings:
-        csv_lines.append(f'{r["timestamp"]},{r["sensor_id"]},{r["temperature_f"]},{r["humidity_percent"]}')
+        timestamp = sanitize_csv_value(r["timestamp"])
+        sensor_id = sanitize_csv_value(r["sensor_id"])
+        temp = sanitize_csv_value(r["temperature_f"])
+        humidity = sanitize_csv_value(r["humidity_percent"])
+        csv_lines.append(f'{timestamp},{sensor_id},{temp},{humidity}')
 
     csv_content = '\n'.join(csv_lines)
 
@@ -449,7 +553,7 @@ def reports_export():
 
     return Response(
         csv_content,
-        mimetype='text/csv',
+        mimetype='text/csv; charset=utf-8',
         headers={'Content-Disposition': f'attachment; filename=sensor_data_{time_range}h.csv'}
     )
 
@@ -482,6 +586,11 @@ def admin_sensor_create():
 
         if not (0 <= humidity <= 100):
             flash('Humidity must be between 0 and 100%', 'danger')
+            return redirect(url_for('admin_sensor'))
+
+        # VULN-009 fix: Validate sensor_id against whitelist
+        if sensor_id not in Config.VALID_SENSOR_IDS:
+            flash(f'Invalid sensor ID. Must be one of: {", ".join(Config.VALID_SENSOR_IDS)}', 'danger')
             return redirect(url_for('admin_sensor'))
 
         reading = data_manager.create_sensor_reading(temperature, humidity, sensor_id)

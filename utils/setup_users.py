@@ -58,7 +58,7 @@ def setup_default_users():
         if dm.get_user(account['username']):
             print(f"User '{account['username']}' already exists, skipping.")
         else:
-            success = dm.create_user(
+            success, error_msg = dm.create_user(
                 account['username'],
                 account['password'],
                 account['role']
@@ -66,7 +66,7 @@ def setup_default_users():
             if success:
                 print(f"Created user '{account['username']}' with role '{account['role']}'")
             else:
-                print(f"Failed to create user '{account['username']}'")
+                print(f"Failed to create user '{account['username']}': {error_msg}")
 
     print("-" * 40)
     print("Setup complete!")

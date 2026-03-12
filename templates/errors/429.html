@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}Too Many Requests - Environmental Sensor System{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card border-warning">
+            <div class="card-header bg-warning text-dark">
+                <h4 class="mb-0">429 - Too Many Requests</h4>
+            </div>
+            <div class="card-body text-center">
+                <p class="lead">You have made too many requests in a short period of time.</p>
+                <p>Please wait a moment before trying again.</p>
+                <p class="text-muted small mt-4">
+                    This limit helps protect the system from abuse.
+                </p>
+                <hr>
+                <a href="{{ url_for('login') }}" class="btn btn-primary">Try Again</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
